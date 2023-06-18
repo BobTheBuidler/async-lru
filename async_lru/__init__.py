@@ -207,7 +207,7 @@ class _LRUCacheWrapper(Generic[_R]):
                             raise e
                         while not cache_item.fut.done():
                             await asyncio.sleep(0)
-                        return cache_item.result()
+                        return cache_item.fut.result()
                 else:
                     # This will run in threads that did not create the cache_item.
                     while not cache_item.fut.done():
