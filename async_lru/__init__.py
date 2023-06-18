@@ -198,7 +198,16 @@ class _LRUCacheWrapper(Generic[_R]):
                 if asyncio.get_event_loop() == cache_item.fut._loop:
                     # This will run in the thread that created the cache_item.
                     self._cache_hit(key)
-                    return await asyncio.shield(cache_item.fut)
+
+                    # NOTE: This try, except is just in because of something I don't want to debug atm wrt my custom event loop implementation.
+                    try:
+                        return await asyncio.shield(cache_item.fut)
+                    except RuntimeError as e:
+                        if "attached to a different loop" not in str(e):
+                            raise e
+                        while not cache_item.fut.done():
+                            await asyncio.sleep(0)
+                        return cache_item.result()
                 else:
                     # This will run in threads that did not create the cache_item.
                     while not cache_item.fut.done():
