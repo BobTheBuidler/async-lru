@@ -79,15 +79,42 @@ async def faster_cached_func_unbounded_ttl(x):
     return x
 
 
+class Methods:
+    @async_lru.alru_cache(maxsize=128)
+    async def cached_meth(self, x):
+        return x
+    @faster_async_lru.alru_cache(maxsize=128)
+    async def faster_cached_meth(self, x):
+        return x
+    @async_lru.alru_cache(maxsize=16, ttl=0.01)
+    async def cached_meth_ttl(self, x):
+        return x
+    @faster_async_lru.alru_cache(maxsize=16, ttl=0.01)
+    async def faster_cached_meth_ttl(self, x):
+        return x
+    @async_lru.alru_cache()
+    async def cached_meth_unbounded(self, x):
+        return x
+    @faster_async_lru.alru_cache()
+    async def faster_cached_meth_unbounded(self, x):
+        return x
+    @async_lru.alru_cache(ttl=0.01)
+    async def cached_meth_unbounded_ttl(self, x):
+        return x
+    @faster_async_lru.alru_cache(ttl=0.01)
+    async def faster_cached_meth_unbounded_ttl(self, x):
+        return x
+
+
 async def uncached_func(x):
     return x
 
 
-ids = ["bounded", "unbounded"]
-funcs = [cached_func, cached_func_unbounded]
-faster_funcs = [faster_cached_func, faster_cached_func_unbounded]
-funcs_ttl = [cached_func_ttl, cached_func_unbounded_ttl]
-faster_funcs_ttl = [faster_cached_func_ttl, faster_cached_func_unbounded_ttl]
+ids = ["bounded", "unbounded", "meth-bounded", "meth-unbounded"]
+funcs = [cached_func, cached_func_unbounded, Methods.cached_meth, Methods.cached_meth_unbounded]
+faster_funcs = [faster_cached_func, faster_cached_func_unbounded, Methods.faster_cached_meth, Methods.faster_cached_meth_unbounded]
+funcs_ttl = [cached_func_ttl, cached_func_unbounded_ttl, Methods.cached_meth_ttl, Methods.cached_meth_unbounded_ttl]
+faster_funcs_ttl = [faster_cached_func_ttl, faster_cached_func_unbounded_ttl, Methods.faster_cached_meth_ttl, Methods.faster_cached_meth_unbounded_ttl]
 
 
 @pytest.mark.parametrize("func", funcs, ids=ids)
@@ -360,8 +387,13 @@ def test_faster_cache_fill_eviction_benchmark(
 # These benchmarks directly exercise internal (sync) methods and data structures
 # not covered by the async public API benchmarks above.
 
+# The relevant internal methods do not exist on _LRUCacheWrapperInstanceMethod,
+# so we can skip methods for this part of the benchmark suite.
+only_funcs = funcs[:2]
+only_faster_funcs = faster_funcs[:2]
+func_ids = ids[:2]
 
-@pytest.mark.parametrize("func", funcs, ids=ids)
+@pytest.mark.parametrize("func", only_funcs, ids=func_ids)
 def test_internal_cache_hit_microbenchmark(
     benchmark: BenchmarkFixture,
     run_loop: Callable[..., Any],
@@ -381,7 +413,7 @@ def test_internal_cache_hit_microbenchmark(
             cache_hit(i)
 
 
-@pytest.mark.parametrize("func", faster_funcs, ids=ids)
+@pytest.mark.parametrize("func", only_faster_funcs, ids=func_ids)
 def test_faster_internal_cache_hit_microbenchmark(
     benchmark: BenchmarkFixture,
     run_loop: Callable[..., Any],
@@ -401,7 +433,7 @@ def test_faster_internal_cache_hit_microbenchmark(
             cache_hit(i)
 
 
-@pytest.mark.parametrize("func", funcs, ids=ids)
+@pytest.mark.parametrize("func", only_funcs, ids=func_ids)
 def test_internal_cache_miss_microbenchmark(
     benchmark: BenchmarkFixture, func: async_lru._LRUCacheWrapper[Any]
 ) -> None:
@@ -414,7 +446,7 @@ def test_internal_cache_miss_microbenchmark(
             cache_miss(i)
 
 
-@pytest.mark.parametrize("func", faster_funcs, ids=ids)
+@pytest.mark.parametrize("func", only_faster_funcs, ids=func_ids)
 def test_faster_internal_cache_miss_microbenchmark(
     benchmark: BenchmarkFixture, func: faster_async_lru._LRUCacheWrapper[Any]
 ) -> None:
@@ -427,7 +459,7 @@ def test_faster_internal_cache_miss_microbenchmark(
             cache_miss(i)
 
 
-@pytest.mark.parametrize("func", funcs, ids=ids)
+@pytest.mark.parametrize("func", only_funcs, ids=func_ids)
 @pytest.mark.parametrize("task_state", ["finished", "cancelled", "exception"])
 def test_internal_task_done_callback_microbenchmark(
     benchmark: BenchmarkFixture,
@@ -468,7 +500,7 @@ def test_internal_task_done_callback_microbenchmark(
             callback(create_future(), i, task)
 
 
-@pytest.mark.parametrize("func", faster_funcs, ids=ids)
+@pytest.mark.parametrize("func", only_faster_funcs, ids=func_ids)
 @pytest.mark.parametrize("task_state", ["finished", "cancelled", "exception"])
 def test_faster_internal_task_done_callback_microbenchmark(
     benchmark: BenchmarkFixture,
