@@ -135,7 +135,7 @@ jobs:
       with:
         changes_file: CHANGES.rst
         name: async-lru
-        version_file: async_lru/__init__.py
+        version_file: faster_async_lru/__init__.py
         github_token: ${{ secrets.GITHUB_TOKEN }}
         dist_dir: dist
         fix_issue_regex: "`#(\\d+) <https://github.com/aio-libs/async-lru/issues/\\1>`"

@@ -1,17 +1,19 @@
 import asyncio
 import dataclasses
+import functools
 import inspect
+import os
 import sys
-from functools import _CacheInfo, _make_key, partial, partialmethod
+from collections import namedtuple
 from typing import (
     Any,
     Callable,
     Coroutine,
+    Final,
     Generic,
     Hashable,
     Optional,
     OrderedDict,
-    Set,
     Type,
     TypedDict,
     TypeVar,
@@ -20,6 +22,8 @@ from typing import (
     final,
     overload,
 )
+
+from mypy_extensions import mypyc_attr
 
 
 if sys.version_info >= (3, 11):
@@ -40,7 +44,17 @@ _T = TypeVar("_T")
 _R = TypeVar("_R")
 _Coro = Coroutine[Any, Any, _R]
 _CB = Callable[..., _Coro[_R]]
-_CBP = Union[_CB[_R], "partial[_Coro[_R]]", "partialmethod[_Coro[_R]]"]
+_CBP = Union[_CB[_R], "functools.partial[_Coro[_R]]", "functools.partialmethod[_Coro[_R]]"]
+
+_CacheInfo = namedtuple("_CacheInfo", ["hits", "misses", "maxsize", "currsize"])
+
+
+partial: Final = functools.partial
+partialmethod: Final = functools.partialmethod
+
+gather: Final = asyncio.gather
+get_running_loop: Final = asyncio.get_running_loop
+shield: Final = asyncio.shield
 
 
 @final
@@ -53,8 +67,8 @@ class _CacheParameters(TypedDict):
 
 @final
 @dataclasses.dataclass
-class _CacheItem(Generic[_R]):
-    fut: "asyncio.Future[_R]"
+class _CacheItem:  # (Generic[_R]): uncomment this when https://github.com/mypyc/mypyc/issues/1061 is resolved
+    fut: "asyncio.Future[Any]"  # [_R]"
     later_call: Optional[asyncio.Handle]
 
     def cancel(self) -> None:
@@ -73,42 +87,42 @@ class _LRUCacheWrapper(Generic[_R]):
         ttl: Optional[float],
     ) -> None:
         try:
-            self.__module__ = fn.__module__
+            self.__module__: Final = fn.__module__
         except AttributeError:
             pass
         try:
-            self.__name__ = fn.__name__
+            self.__name__: Final = fn.__name__
         except AttributeError:
             pass
         try:
-            self.__qualname__ = fn.__qualname__
+            self.__qualname__: Final = fn.__qualname__
         except AttributeError:
             pass
         try:
-            self.__doc__ = fn.__doc__
+            self.__doc__: Final = fn.__doc__
         except AttributeError:
             pass
         try:
-            self.__annotations__ = fn.__annotations__
+            self.__annotations__: Final = fn.__annotations__
         except AttributeError:
             pass
         try:
-            self.__dict__.update(fn.__dict__)
+            self.__dict__: Final = dict(fn.__dict__)
         except AttributeError:
             pass
         # set __wrapped__ last so we don't inadvertently copy it
         # from the wrapped function when updating __dict__
         if sys.version_info < (3, 14):
-            self._is_coroutine = _is_coroutine
-        self.__wrapped__ = fn
-        self.__maxsize = maxsize
-        self.__typed = typed
-        self.__ttl = ttl
-        self.__cache: OrderedDict[Hashable, _CacheItem[_R]] = OrderedDict()
+            self._is_coroutine: Final = _is_coroutine
+        self.__wrapped__: Final = fn
+        self.__maxsize: Final = maxsize
+        self.__typed: Final = typed
+        self.__ttl: Final = ttl
+        self.__cache: Final[OrderedDict[Hashable, _CacheItem]] = OrderedDict()
         self.__closed = False
         self.__hits = 0
         self.__misses = 0
-        self.__tasks: Set["asyncio.Task[_R]"] = set()
+        self.__tasks: Final[set["asyncio.Task[_R]"]] = set()
 
     def cache_invalidate(self, /, *args: Hashable, **kwargs: Any) -> bool:
         key = _make_key(args, kwargs, self.__typed)
@@ -142,7 +156,7 @@ class _LRUCacheWrapper(Generic[_R]):
                 if not task.done():
                     task.cancel()
 
-        await asyncio.gather(*tasks, return_exceptions=True)
+        await gather(*tasks, return_exceptions=True)
 
     def cache_info(self) -> _CacheInfo:
         return _CacheInfo(
@@ -172,22 +186,25 @@ class _LRUCacheWrapper(Generic[_R]):
     ) -> None:
         self.__tasks.discard(task)
 
+        cache = self.__cache
+
         if task.cancelled():
             fut.cancel()
-            self.__cache.pop(key, None)
+            cache.pop(key, None)
             return
 
         exc = task.exception()
         if exc is not None:
             fut.set_exception(exc)
-            self.__cache.pop(key, None)
+            cache.pop(key, None)
             return
 
-        cache_item = self.__cache.get(key)
-        if self.__ttl is not None and cache_item is not None:
-            loop = asyncio.get_running_loop()
+        cache_item = cache.get(key)
+        ttl = self.__ttl
+        if ttl is not None and cache_item is not None:
+            loop = get_running_loop()
             cache_item.later_call = loop.call_later(
-                self.__ttl, self.__cache.pop, key, None
+                ttl, cache.pop, key, None
             )
 
         fut.set_result(task.result())
@@ -196,18 +213,22 @@ class _LRUCacheWrapper(Generic[_R]):
         if self.__closed:
             raise RuntimeError(f"alru_cache is closed for {self}")
 
-        loop = asyncio.get_running_loop()
+        loop = get_running_loop()
 
         key = _make_key(fn_args, fn_kwargs, self.__typed)
 
-        cache_item = self.__cache.get(key)
+        cache = self.__cache
+
+        cache_item = cache.get(key)
 
         if cache_item is not None:
             self._cache_hit(key)
-            if not cache_item.fut.done():
-                return await asyncio.shield(cache_item.fut)
 
-            return cache_item.fut.result()
+            fut: "asyncio.Future[_R]" = cache_item.fut
+            if not fut.done():
+                return await shield(fut)
+
+            return fut.result()
 
         fut = loop.create_future()
         coro = self.__wrapped__(*fn_args, **fn_kwargs)
@@ -215,14 +236,15 @@ class _LRUCacheWrapper(Generic[_R]):
         self.__tasks.add(task)
         task.add_done_callback(partial(self._task_done_callback, fut, key))
 
-        self.__cache[key] = _CacheItem(fut, None)
+        cache[key] = _CacheItem(fut, None)
 
-        if self.__maxsize is not None and len(self.__cache) > self.__maxsize:
-            dropped_key, cache_item = self.__cache.popitem(last=False)
+        maxsize = self.__maxsize
+        if maxsize is not None and len(cache) > maxsize:
+            dropped_key, cache_item = cache.popitem(last=False)
             cache_item.cancel()
 
         self._cache_miss(key)
-        return await asyncio.shield(fut)
+        return await shield(fut)
 
     def __get__(
         self, instance: _T, owner: Optional[Type[_T]]
@@ -241,36 +263,36 @@ class _LRUCacheWrapperInstanceMethod(Generic[_R, _T]):
         instance: _T,
     ) -> None:
         try:
-            self.__module__ = wrapper.__module__
+            self.__module__: Final = wrapper.__module__
         except AttributeError:
             pass
         try:
-            self.__name__ = wrapper.__name__
+            self.__name__: Final = wrapper.__name__
         except AttributeError:
             pass
         try:
-            self.__qualname__ = wrapper.__qualname__
+            self.__qualname__: Final = wrapper.__qualname__
         except AttributeError:
             pass
         try:
-            self.__doc__ = wrapper.__doc__
+            self.__doc__: Final = wrapper.__doc__
         except AttributeError:
             pass
         try:
-            self.__annotations__ = wrapper.__annotations__
+            self.__annotations__: Final = wrapper.__annotations__
         except AttributeError:
             pass
         try:
-            self.__dict__.update(wrapper.__dict__)
+            self.__dict__: Final = dict(wrapper.__dict__)
         except AttributeError:
             pass
         # set __wrapped__ last so we don't inadvertently copy it
         # from the wrapped function when updating __dict__
         if sys.version_info < (3, 14):
-            self._is_coroutine = _is_coroutine
-        self.__wrapped__ = wrapper.__wrapped__
-        self.__instance = instance
-        self.__wrapper = wrapper
+            self._is_coroutine: Final = _is_coroutine
+        self.__wrapped__: Final = wrapper.__wrapped__
+        self.__instance: Final = instance
+        self.__wrapper: Final = wrapper
 
     def cache_invalidate(self, /, *args: Hashable, **kwargs: Any) -> bool:
         return self.__wrapper.cache_invalidate(self.__instance, *args, **kwargs)
@@ -304,7 +326,7 @@ def _make_wrapper(
         while isinstance(origin, (partial, partialmethod)):
             origin = origin.func
 
-        if not inspect.iscoroutinefunction(origin):
+        if not inspect.iscoroutinefunction(origin) and not os.environ.get("ASYNC_LRU_ALLOW_SYNC"):
             raise RuntimeError(f"Coroutine function is required, got {fn!r}")
 
         # functools.partialmethod support
@@ -321,19 +343,19 @@ def _make_wrapper(
 
 @overload
 def alru_cache(
-    maxsize: Optional[int] = 128,
-    typed: bool = False,
-    *,
-    ttl: Optional[float] = None,
-) -> Callable[[_CBP[_R]], _LRUCacheWrapper[_R]]:
+    maxsize: _CBP[_R],
+    /,
+) -> _LRUCacheWrapper[_R]:
     ...
 
 
 @overload
 def alru_cache(
-    maxsize: _CBP[_R],
-    /,
-) -> _LRUCacheWrapper[_R]:
+    maxsize: Optional[int] = 128,
+    typed: bool = False,
+    *,
+    ttl: Optional[float] = None,
+) -> Callable[[_CBP[_R]], _LRUCacheWrapper[_R]]:
     ...
 
 
@@ -352,3 +374,57 @@ def alru_cache(
             return _make_wrapper(128, False, None)(fn)
 
         raise NotImplementedError(f"{fn!r} decorating is not supported")
+
+
+# I've vendored the below code from `functools` so we can compile it with the rest
+# of this lib and make everything, including key generation, super fast.
+
+@final
+@mypyc_attr(native_class=False)
+class _HashedSeq(list[Any]):
+    """ This class guarantees that hash() will be called no more than once
+        per element.  This is important because the lru_cache() will hash
+        the key multiple times on a cache miss.
+
+    """
+
+    __slots__ = 'hashvalue'
+
+    def __init__(self, tup: tuple[Any, ...]) -> None:
+        self[:] = tup
+        self.hashvalue: Final = hash(tup)
+
+    def __hash__(self) -> int:  # type: ignore [override]
+        return self.hashvalue
+
+
+def _make_key(args: tuple, kwds: dict, typed: bool) -> Union[str, int, _HashedSeq]:  # type: ignore [type-arg]
+    """Make a cache key from optionally typed positional and keyword arguments
+
+    The key is constructed in a way that is flat as possible rather than
+    as a nested structure that would take more memory.
+
+    If there is only a single argument and its data type is known to cache
+    its hash value, then that argument is returned without a wrapper.  This
+    saves space and improves lookup speed.
+
+    """
+    # All of code below relies on kwds preserving the order input by the user.
+    # Formerly, we sorted() the kwds before looping.  The new way is *much*
+    # faster; however, it means that f(x=1, y=2) will now be treated as a
+    # distinct call from f(y=2, x=1) which will be cached separately.
+    key = args
+    if kwds:
+        key += (object(),)
+        for item in kwds.items():
+            key += item
+    if typed:
+        key += tuple(type(v) for v in args)
+        if kwds:
+            key += tuple(type(v) for v in kwds.values())
+    elif len(key) == 1:
+        solearg: Any = key[0]
+        argtype = type(solearg)
+        if argtype is int or argtype is str:
+            return solearg  # type: ignore [no-any-return]
+    return _HashedSeq(key)

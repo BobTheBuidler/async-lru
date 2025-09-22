@@ -2,7 +2,7 @@ import asyncio
 from functools import partial, partialmethod
 from typing import Callable
 
-from async_lru import alru_cache
+from faster_async_lru import alru_cache
 
 
 async def test_partialmethod_basic(check_lru: Callable[..., None]) -> None:
