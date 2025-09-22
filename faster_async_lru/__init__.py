@@ -67,8 +67,8 @@ class _CacheParameters(TypedDict):
 
 @final
 @dataclasses.dataclass
-class _CacheItem(Generic[_R]):
-    fut: "asyncio.Future[_R]"
+class _CacheItem:  # (Generic[_R]): uncomment this when https://github.com/mypyc/mypyc/issues/1061 is resolved
+    fut: "asyncio.Future[Any]"  # [_R]"
     later_call: Optional[asyncio.Handle]
 
     def cancel(self) -> None:
@@ -118,7 +118,7 @@ class _LRUCacheWrapper(Generic[_R]):
         self.__maxsize: Final = maxsize
         self.__typed: Final = typed
         self.__ttl: Final = ttl
-        self.__cache: Final[OrderedDict[Hashable, _CacheItem[_R]]] = OrderedDict()
+        self.__cache: Final[OrderedDict[Hashable, _CacheItem]] = OrderedDict()
         self.__closed = False
         self.__hits = 0
         self.__misses = 0
@@ -224,7 +224,7 @@ class _LRUCacheWrapper(Generic[_R]):
         if cache_item is not None:
             self._cache_hit(key)
 
-            fut = cache_item.fut
+            fut: "asyncio.Future[_R]" = cache_item.fut
             if not fut.done():
                 return await shield(fut)
 
