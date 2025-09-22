@@ -27,7 +27,6 @@ extern CPyModule *CPyModule_sys;
 extern CPyModule *CPyModule_collections;
 extern CPyModule *CPyModule_typing;
 extern CPyModule *CPyModule_mypy_extensions;
-extern CPyModule *CPyModule_typing_extensions;
 extern CPyModule *CPyModule_asyncio___coroutines;
 extern PyObject *CPyStatic_partial;
 extern PyObject *CPyStatic_partialmethod;

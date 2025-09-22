@@ -65,70 +65,69 @@ def _LRUCacheWrapper.__init__(self, fn, maxsize, typed, ttl):
     r6 :: str
     r7 :: object
     r8, r9 :: bit
-    r10 :: str
-    r11 :: object
-    r12 :: str
-    r13 :: bool
-    r14 :: tuple[object, object, object]
-    r15 :: object
-    r16 :: str
-    r17 :: object
-    r18, r19 :: bit
-    r20 :: str
-    r21 :: object
-    r22 :: str
-    r23 :: bool
-    r24 :: tuple[object, object, object]
-    r25 :: object
-    r26 :: str
-    r27 :: object
-    r28, r29 :: bit
-    r30 :: str
-    r31 :: object
-    r32 :: union[str, None]
-    r33 :: bool
-    r34 :: tuple[object, object, object]
-    r35 :: object
-    r36 :: str
-    r37 :: object
-    r38, r39 :: bit
-    r40 :: str
-    r41 :: object
-    r42 :: dict
-    r43 :: bool
-    r44 :: tuple[object, object, object]
-    r45 :: object
-    r46 :: str
-    r47 :: object
-    r48, r49 :: bit
-    r50 :: str
-    r51 :: object
-    r52, r53 :: dict
-    r54 :: bool
-    r55 :: tuple[object, object, object]
-    r56 :: object
-    r57 :: str
-    r58 :: object
-    r59, r60 :: bit
-    r61 :: object
-    r62 :: str
-    r63 :: object
-    r64 :: tuple
-    r65 :: tuple[int, int]
-    r66, r67 :: object
-    r68 :: bool
-    r69 :: dict
-    r70 :: str
-    r71 :: object
-    r72, r73, r74, r75, r76 :: bool
-    r77 :: dict
-    r78 :: str
-    r79, r80 :: object
-    r81 :: dict
-    r82, r83, r84, r85 :: bool
-    r86 :: set
-    r87 :: bool
-    r88 :: None
+    r10 :: object
+    r11 :: str
+    r12 :: bool
+    r13 :: tuple[object, object, object]
+    r14 :: object
+    r15 :: str
+    r16 :: object
+    r17, r18 :: bit
+    r19 :: str
+    r20 :: object
+    r21 :: str
+    r22 :: bool
+    r23 :: tuple[object, object, object]
+    r24 :: object
+    r25 :: str
+    r26 :: object
+    r27, r28 :: bit
+    r29 :: str
+    r30 :: object
+    r31 :: union[str, None]
+    r32 :: bool
+    r33 :: tuple[object, object, object]
+    r34 :: object
+    r35 :: str
+    r36 :: object
+    r37, r38 :: bit
+    r39 :: str
+    r40 :: object
+    r41 :: dict
+    r42 :: bool
+    r43 :: tuple[object, object, object]
+    r44 :: object
+    r45 :: str
+    r46 :: object
+    r47, r48 :: bit
+    r49 :: str
+    r50 :: object
+    r51, r52 :: dict
+    r53 :: bool
+    r54 :: tuple[object, object, object]
+    r55 :: object
+    r56 :: str
+    r57 :: object
+    r58, r59 :: bit
+    r60 :: object
+    r61 :: str
+    r62 :: object
+    r63 :: tuple
+    r64 :: tuple[int, int]
+    r65, r66 :: object
+    r67 :: bool
+    r68 :: dict
+    r69 :: str
+    r70 :: object
+    r71, r72, r73, r74, r75 :: bool
+    r76 :: dict
+    r77 :: str
+    r78, r79 :: object
+    r80 :: dict
+    r81, r82, r83, r84 :: bool
+    r85 :: set
+    r86 :: bool
+    r87 :: None
 L0:
 L1:
     r0 = '__module__'
@@ -167,285 +166,284 @@ L9:
 L10:
     unreachable
 L11:
-    r10 = '__name__'
-    r11 = CPyObject_GetAttr(fn, r10)
-    if is_error(r11) goto L14 (error at __init__:94) else goto L12
+    r10 = CPy_GetName(fn)
+    if is_error(r10) goto L14 (error at __init__:94) else goto L12
 L12:
-    r12 = cast(str, r11)
-    if is_error(r12) goto L14 (error at __init__:94) else goto L13
+    r11 = cast(str, r10)
+    if is_error(r11) goto L14 (error at __init__:94) else goto L13
 L13:
-    self.__name__ = r12; r13 = is_error
-    if not r13 goto L14 (error at __init__:94) else goto L21 :: bool
+    self.__name__ = r11; r12 = is_error
+    if not r12 goto L14 (error at __init__:94) else goto L21 :: bool
 L14:
-    r14 = CPy_CatchError()
-    r15 = builtins :: module
-    r16 = 'AttributeError'
-    r17 = CPyObject_GetAttr(r15, r16)
-    if is_error(r17) goto L19 (error at __init__:95) else goto L15
+    r13 = CPy_CatchError()
+    r14 = builtins :: module
+    r15 = 'AttributeError'
+    r16 = CPyObject_GetAttr(r14, r15)
+    if is_error(r16) goto L19 (error at __init__:95) else goto L15
 L15:
-    r18 = CPy_ExceptionMatches(r17)
-    dec_ref r17
-    if r18 goto L18 else goto L16 :: bool
+    r17 = CPy_ExceptionMatches(r16)
+    dec_ref r16
+    if r17 goto L18 else goto L16 :: bool
 L16:
     CPy_Reraise()
     if not 0 goto L19 else goto L85 :: bool
 L17:
     unreachable
 L18:
-    CPy_RestoreExcInfo(r14)
-    dec_ref r14
+    CPy_RestoreExcInfo(r13)
+    dec_ref r13
     goto L21
 L19:
-    CPy_RestoreExcInfo(r14)
-    dec_ref r14
-    r19 = CPy_KeepPropagating()
-    if not r19 goto L83 else goto L20 :: bool
+    CPy_RestoreExcInfo(r13)
+    dec_ref r13
+    r18 = CPy_KeepPropagating()
+    if not r18 goto L83 else goto L20 :: bool
 L20:
     unreachable
 L21:
-    r20 = '__qualname__'
-    r21 = CPyObject_GetAttr(fn, r20)
-    if is_error(r21) goto L24 (error at __init__:98) else goto L22
+    r19 = '__qualname__'
+    r20 = CPyObject_GetAttr(fn, r19)
+    if is_error(r20) goto L24 (error at __init__:98) else goto L22
 L22:
-    r22 = cast(str, r21)
-    if is_error(r22) goto L24 (error at __init__:98) else goto L23
+    r21 = cast(str, r20)
+    if is_error(r21) goto L24 (error at __init__:98) else goto L23
 L23:
-    self.__qualname__ = r22; r23 = is_error
-    if not r23 goto L24 (error at __init__:98) else goto L31 :: bool
+    self.__qualname__ = r21; r22 = is_error
+    if not r22 goto L24 (error at __init__:98) else goto L31 :: bool
 L24:
-    r24 = CPy_CatchError()
-    r25 = builtins :: module
-    r26 = 'AttributeError'
-    r27 = CPyObject_GetAttr(r25, r26)
-    if is_error(r27) goto L29 (error at __init__:99) else goto L25
+    r23 = CPy_CatchError()
+    r24 = builtins :: module
+    r25 = 'AttributeError'
+    r26 = CPyObject_GetAttr(r24, r25)
+    if is_error(r26) goto L29 (error at __init__:99) else goto L25
 L25:
-    r28 = CPy_ExceptionMatches(r27)
-    dec_ref r27
-    if r28 goto L28 else goto L26 :: bool
+    r27 = CPy_ExceptionMatches(r26)
+    dec_ref r26
+    if r27 goto L28 else goto L26 :: bool
 L26:
     CPy_Reraise()
     if not 0 goto L29 else goto L86 :: bool
 L27:
     unreachable
 L28:
-    CPy_RestoreExcInfo(r24)
-    dec_ref r24
+    CPy_RestoreExcInfo(r23)
+    dec_ref r23
     goto L31
 L29:
-    CPy_RestoreExcInfo(r24)
-    dec_ref r24
-    r29 = CPy_KeepPropagating()
-    if not r29 goto L83 else goto L30 :: bool
+    CPy_RestoreExcInfo(r23)
+    dec_ref r23
+    r28 = CPy_KeepPropagating()
+    if not r28 goto L83 else goto L30 :: bool
 L30:
     unreachable
 L31:
-    r30 = '__doc__'
-    r31 = CPyObject_GetAttr(fn, r30)
-    if is_error(r31) goto L34 (error at __init__:102) else goto L32
+    r29 = '__doc__'
+    r30 = CPyObject_GetAttr(fn, r29)
+    if is_error(r30) goto L34 (error at __init__:102) else goto L32
 L32:
-    r32 = cast(union[str, None], r31)
-    if is_error(r32) goto L34 (error at __init__:102) else goto L33
+    r31 = cast(union[str, None], r30)
+    if is_error(r31) goto L34 (error at __init__:102) else goto L33
 L33:
-    self.__doc__ = r32; r33 = is_error
-    if not r33 goto L34 (error at __init__:102) else goto L41 :: bool
+    self.__doc__ = r31; r32 = is_error
+    if not r32 goto L34 (error at __init__:102) else goto L41 :: bool
 L34:
-    r34 = CPy_CatchError()
-    r35 = builtins :: module
-    r36 = 'AttributeError'
-    r37 = CPyObject_GetAttr(r35, r36)
-    if is_error(r37) goto L39 (error at __init__:103) else goto L35
+    r33 = CPy_CatchError()
+    r34 = builtins :: module
+    r35 = 'AttributeError'
+    r36 = CPyObject_GetAttr(r34, r35)
+    if is_error(r36) goto L39 (error at __init__:103) else goto L35
 L35:
-    r38 = CPy_ExceptionMatches(r37)
-    dec_ref r37
-    if r38 goto L38 else goto L36 :: bool
+    r37 = CPy_ExceptionMatches(r36)
+    dec_ref r36
+    if r37 goto L38 else goto L36 :: bool
 L36:
     CPy_Reraise()
     if not 0 goto L39 else goto L87 :: bool
 L37:
     unreachable
 L38:
-    CPy_RestoreExcInfo(r34)
-    dec_ref r34
+    CPy_RestoreExcInfo(r33)
+    dec_ref r33
     goto L41
 L39:
-    CPy_RestoreExcInfo(r34)
-    dec_ref r34
-    r39 = CPy_KeepPropagating()
-    if not r39 goto L83 else goto L40 :: bool
+    CPy_RestoreExcInfo(r33)
+    dec_ref r33
+    r38 = CPy_KeepPropagating()
+    if not r38 goto L83 else goto L40 :: bool
 L40:
     unreachable
 L41:
-    r40 = '__annotations__'
-    r41 = CPyObject_GetAttr(fn, r40)
-    if is_error(r41) goto L44 (error at __init__:106) else goto L42
+    r39 = '__annotations__'
+    r40 = CPyObject_GetAttr(fn, r39)
+    if is_error(r40) goto L44 (error at __init__:106) else goto L42
 L42:
-    r42 = cast(dict, r41)
-    if is_error(r42) goto L44 (error at __init__:106) else goto L43
+    r41 = cast(dict, r40)
+    if is_error(r41) goto L44 (error at __init__:106) else goto L43
 L43:
-    self.__annotations__ = r42; r43 = is_error
-    if not r43 goto L44 (error at __init__:106) else goto L51 :: bool
+    self.__annotations__ = r41; r42 = is_error
+    if not r42 goto L44 (error at __init__:106) else goto L51 :: bool
 L44:
-    r44 = CPy_CatchError()
-    r45 = builtins :: module
-    r46 = 'AttributeError'
-    r47 = CPyObject_GetAttr(r45, r46)
-    if is_error(r47) goto L49 (error at __init__:107) else goto L45
+    r43 = CPy_CatchError()
+    r44 = builtins :: module
+    r45 = 'AttributeError'
+    r46 = CPyObject_GetAttr(r44, r45)
+    if is_error(r46) goto L49 (error at __init__:107) else goto L45
 L45:
-    r48 = CPy_ExceptionMatches(r47)
-    dec_ref r47
-    if r48 goto L48 else goto L46 :: bool
+    r47 = CPy_ExceptionMatches(r46)
+    dec_ref r46
+    if r47 goto L48 else goto L46 :: bool
 L46:
     CPy_Reraise()
     if not 0 goto L49 else goto L88 :: bool
 L47:
     unreachable
 L48:
-    CPy_RestoreExcInfo(r44)
-    dec_ref r44
+    CPy_RestoreExcInfo(r43)
+    dec_ref r43
     goto L51
 L49:
-    CPy_RestoreExcInfo(r44)
-    dec_ref r44
-    r49 = CPy_KeepPropagating()
-    if not r49 goto L83 else goto L50 :: bool
+    CPy_RestoreExcInfo(r43)
+    dec_ref r43
+    r48 = CPy_KeepPropagating()
+    if not r48 goto L83 else goto L50 :: bool
 L50:
     unreachable
 L51:
-    r50 = '__dict__'
-    r51 = CPyObject_GetAttr(fn, r50)
-    if is_error(r51) goto L55 (error at __init__:110) else goto L52
+    r49 = '__dict__'
+    r50 = CPyObject_GetAttr(fn, r49)
+    if is_error(r50) goto L55 (error at __init__:110) else goto L52
 L52:
-    r52 = cast(dict, r51)
-    if is_error(r52) goto L55 (error at __init__:110) else goto L53
+    r51 = cast(dict, r50)
+    if is_error(r51) goto L55 (error at __init__:110) else goto L53
 L53:
-    r53 = PyDict_Copy(r52)
-    dec_ref r52
-    if is_error(r53) goto L55 (error at __init__:110) else goto L54
+    r52 = PyDict_Copy(r51)
+    dec_ref r51
+    if is_error(r52) goto L55 (error at __init__:110) else goto L54
 L54:
-    self.__dict__ = r53; r54 = is_error
-    if not r54 goto L55 (error at __init__:110) else goto L62 :: bool
+    self.__dict__ = r52; r53 = is_error
+    if not r53 goto L55 (error at __init__:110) else goto L62 :: bool
 L55:
-    r55 = CPy_CatchError()
-    r56 = builtins :: module
-    r57 = 'AttributeError'
-    r58 = CPyObject_GetAttr(r56, r57)
-    if is_error(r58) goto L60 (error at __init__:111) else goto L56
+    r54 = CPy_CatchError()
+    r55 = builtins :: module
+    r56 = 'AttributeError'
+    r57 = CPyObject_GetAttr(r55, r56)
+    if is_error(r57) goto L60 (error at __init__:111) else goto L56
 L56:
-    r59 = CPy_ExceptionMatches(r58)
-    dec_ref r58
-    if r59 goto L59 else goto L57 :: bool
+    r58 = CPy_ExceptionMatches(r57)
+    dec_ref r57
+    if r58 goto L59 else goto L57 :: bool
 L57:
     CPy_Reraise()
     if not 0 goto L60 else goto L89 :: bool
 L58:
     unreachable
 L59:
-    CPy_RestoreExcInfo(r55)
-    dec_ref r55
+    CPy_RestoreExcInfo(r54)
+    dec_ref r54
     goto L62
 L60:
-    CPy_RestoreExcInfo(r55)
-    dec_ref r55
-    r60 = CPy_KeepPropagating()
-    if not r60 goto L83 else goto L61 :: bool
+    CPy_RestoreExcInfo(r54)
+    dec_ref r54
+    r59 = CPy_KeepPropagating()
+    if not r59 goto L83 else goto L61 :: bool
 L61:
     unreachable
 L62:
-    r61 = sys :: module
-    r62 = 'version_info'
-    r63 = CPyObject_GetAttr(r61, r62)
-    if is_error(r63) goto L83 (error at __init__:115) else goto L63
+    r60 = sys :: module
+    r61 = 'version_info'
+    r62 = CPyObject_GetAttr(r60, r61)
+    if is_error(r62) goto L83 (error at __init__:115) else goto L63
 L63:
-    r64 = cast(tuple, r63)
-    if is_error(r64) goto L83 (error at __init__:115) else goto L64
+    r63 = cast(tuple, r62)
+    if is_error(r63) goto L83 (error at __init__:115) else goto L64
 L64:
-    r65 = (6, 28)
-    r66 = box(tuple[int, int], r65)
-    r67 = PyObject_RichCompare(r64, r66, 0)
-    dec_ref r64
-    dec_ref r66
-    if is_error(r67) goto L83 (error at __init__:115) else goto L65
+    r64 = (6, 28)
+    r65 = box(tuple[int, int], r64)
+    r66 = PyObject_RichCompare(r63, r65, 0)
+    dec_ref r63
+    dec_ref r65
+    if is_error(r66) goto L83 (error at __init__:115) else goto L65
 L65:
-    r68 = unbox(bool, r67)
-    dec_ref r67
-    if is_error(r68) goto L83 (error at __init__:115) else goto L66
+    r67 = unbox(bool, r66)
+    dec_ref r66
+    if is_error(r67) goto L83 (error at __init__:115) else goto L66
 L66:
-    if r68 goto L67 else goto L69 :: bool
+    if r67 goto L67 else goto L69 :: bool
 L67:
-    r69 = faster_async_lru.globals :: static
-    r70 = '_is_coroutine'
-    r71 = CPyDict_GetItem(r69, r70)
-    if is_error(r71) goto L83 (error at __init__:116) else goto L68
+    r68 = faster_async_lru.globals :: static
+    r69 = '_is_coroutine'
+    r70 = CPyDict_GetItem(r68, r69)
+    if is_error(r70) goto L83 (error at __init__:116) else goto L68
 L68:
-    self._is_coroutine = r71; r72 = is_error
-    if not r72 goto L83 (error at __init__:116) else goto L69 :: bool
+    self._is_coroutine = r70; r71 = is_error
+    if not r71 goto L83 (error at __init__:116) else goto L69 :: bool
 L69:
     inc_ref fn
-    self.__wrapped__ = fn; r73 = is_error
-    if not r73 goto L83 (error at __init__:117) else goto L70 :: bool
+    self.__wrapped__ = fn; r72 = is_error
+    if not r72 goto L83 (error at __init__:117) else goto L70 :: bool
 L70:
     inc_ref maxsize
-    self.__maxsize = maxsize; r74 = is_error
-    if not r74 goto L83 (error at __init__:118) else goto L71 :: bool
+    self.__maxsize = maxsize; r73 = is_error
+    if not r73 goto L83 (error at __init__:118) else goto L71 :: bool
 L71:
-    self.__typed = typed; r75 = is_error
-    if not r75 goto L83 (error at __init__:119) else goto L72 :: bool
+    self.__typed = typed; r74 = is_error
+    if not r74 goto L83 (error at __init__:119) else goto L72 :: bool
 L72:
     inc_ref ttl
-    self.__ttl = ttl; r76 = is_error
-    if not r76 goto L83 (error at __init__:120) else goto L73 :: bool
+    self.__ttl = ttl; r75 = is_error
+    if not r75 goto L83 (error at __init__:120) else goto L73 :: bool
 L73:
-    r77 = faster_async_lru.globals :: static
-    r78 = 'OrderedDict'
-    r79 = CPyDict_GetItem(r77, r78)
-    if is_error(r79) goto L83 (error at __init__:121) else goto L74
+    r76 = faster_async_lru.globals :: static
+    r77 = 'OrderedDict'
+    r78 = CPyDict_GetItem(r76, r77)
+    if is_error(r78) goto L83 (error at __init__:121) else goto L74
 L74:
-    r80 = PyObject_Vectorcall(r79, 0, 0, 0)
-    dec_ref r79
-    if is_error(r80) goto L83 (error at __init__:121) else goto L75
+    r79 = PyObject_Vectorcall(r78, 0, 0, 0)
+    dec_ref r78
+    if is_error(r79) goto L83 (error at __init__:121) else goto L75
 L75:
-    r81 = cast(dict, r80)
-    if is_error(r81) goto L83 (error at __init__:121) else goto L76
+    r80 = cast(dict, r79)
+    if is_error(r80) goto L83 (error at __init__:121) else goto L76
 L76:
-    self.__cache = r81; r82 = is_error
-    if not r82 goto L83 (error at __init__:121) else goto L77 :: bool
+    self.__cache = r80; r81 = is_error
+    if not r81 goto L83 (error at __init__:121) else goto L77 :: bool
 L77:
-    self.__closed = 0; r83 = is_error
-    if not r83 goto L83 (error at __init__:122) else goto L78 :: bool
+    self.__closed = 0; r82 = is_error
+    if not r82 goto L83 (error at __init__:122) else goto L78 :: bool
 L78:
-    self.__hits = 0; r84 = is_error
-    if not r84 goto L83 (error at __init__:123) else goto L79 :: bool
+    self.__hits = 0; r83 = is_error
+    if not r83 goto L83 (error at __init__:123) else goto L79 :: bool
 L79:
-    self.__misses = 0; r85 = is_error
-    if not r85 goto L83 (error at __init__:124) else goto L80 :: bool
+    self.__misses = 0; r84 = is_error
+    if not r84 goto L83 (error at __init__:124) else goto L80 :: bool
 L80:
-    r86 = PySet_New(0)
-    if is_error(r86) goto L83 (error at __init__:125) else goto L81
+    r85 = PySet_New(0)
+    if is_error(r85) goto L83 (error at __init__:125) else goto L81
 L81:
-    self.__tasks = r86; r87 = is_error
-    if not r87 goto L83 (error at __init__:125) else goto L82 :: bool
+    self.__tasks = r85; r86 = is_error
+    if not r86 goto L83 (error at __init__:125) else goto L82 :: bool
 L82:
     return 1
 L83:
-    r88 = <error> :: None
-    return r88
+    r87 = <error> :: None
+    return r87
 L84:
     dec_ref r4
     goto L7
 L85:
-    dec_ref r14
+    dec_ref r13
     goto L17
 L86:
-    dec_ref r24
+    dec_ref r23
     goto L27
 L87:
-    dec_ref r34
+    dec_ref r33
     goto L37
 L88:
-    dec_ref r44
+    dec_ref r43
     goto L47
 L89:
-    dec_ref r55
+    dec_ref r54
     goto L58
 
 def _LRUCacheWrapper.cache_invalidate(self, args, kwargs):
@@ -4371,35 +4369,41 @@ def wrapper__make_wrapper_obj.__call__(__mypyc_self__, fn):
     r58 :: union[int, None]
     r59 :: bool
     r60 :: union[float, None]
-    r61 :: faster_async_lru._LRUCacheWrapper
+    r61, wrapper :: faster_async_lru._LRUCacheWrapper
     r62 :: object
     r63 :: str
     r64 :: object
     r65 :: tuple
     r66 :: tuple[int, int]
     r67, r68 :: object
-    r69, r70 :: bool
-    r71 :: faster_async_lru._LRUCacheWrapper
+    r69 :: bool
+    r70 :: object
+    r71 :: str
+    r72 :: object
+    r73 :: object[1]
+    r74 :: object_ptr
+    r75 :: object
+    r76, r77 :: faster_async_lru._LRUCacheWrapper
 L0:
     r0 = __mypyc_self__.__mypyc_env__
-    if is_error(r0) goto L45 (error at wrapper:323) else goto L1
+    if is_error(r0) goto L47 (error at wrapper:323) else goto L1
 L1:
     inc_ref fn
     origin = fn
 L2:
     r1 = faster_async_lru.partial :: static
-    if is_error(r1) goto L46 else goto L5
+    if is_error(r1) goto L48 else goto L5
 L3:
     r2 = raise NameError('value for final name "partial" was not set')
-    if not r2 goto L45 (error at wrapper:326) else goto L4 :: bool
+    if not r2 goto L47 (error at wrapper:326) else goto L4 :: bool
 L4:
     unreachable
 L5:
     r3 = faster_async_lru.partialmethod :: static
-    if is_error(r3) goto L47 else goto L8
+    if is_error(r3) goto L49 else goto L8
 L6:
     r4 = raise NameError('value for final name "partialmethod" was not set')
-    if not r4 goto L45 (error at wrapper:326) else goto L7 :: bool
+    if not r4 goto L47 (error at wrapper:326) else goto L7 :: bool
 L7:
     unreachable
 L8:
@@ -4410,7 +4414,7 @@ L8:
     r7 = PyObject_IsInstance(origin, r6)
     dec_ref r6
     r8 = r7 >= 0 :: signed
-    if not r8 goto L48 (error at wrapper:326) else goto L9 :: bool
+    if not r8 goto L50 (error at wrapper:326) else goto L9 :: bool
 L9:
     r9 = truncate r7: i32 to builtins.bool
     if r9 goto L10 else goto L12 :: bool
@@ -4418,7 +4422,7 @@ L10:
     r10 = 'func'
     r11 = CPyObject_GetAttr(origin, r10)
     dec_ref origin
-    if is_error(r11) goto L49 (error at wrapper:327) else goto L11
+    if is_error(r11) goto L51 (error at wrapper:327) else goto L11
 L11:
     origin = r11
     goto L2
@@ -4426,47 +4430,47 @@ L12:
     r12 = inspect :: module
     r13 = 'iscoroutinefunction'
     r14 = CPyObject_GetAttr(r12, r13)
-    if is_error(r14) goto L48 (error at wrapper:329) else goto L13
+    if is_error(r14) goto L50 (error at wrapper:329) else goto L13
 L13:
     r15 = [origin]
     r16 = load_address r15
     r17 = PyObject_Vectorcall(r14, r16, 1, 0)
     dec_ref r14
-    if is_error(r17) goto L48 (error at wrapper:329) else goto L14
+    if is_error(r17) goto L50 (error at wrapper:329) else goto L14
 L14:
     dec_ref origin
     r18 = unbox(bool, r17)
     dec_ref r17
-    if is_error(r18) goto L49 (error at wrapper:329) else goto L15
+    if is_error(r18) goto L51 (error at wrapper:329) else goto L15
 L15:
     if r18 goto L30 else goto L16 :: bool
 L16:
     r19 = os :: module
     r20 = 'environ'
     r21 = CPyObject_GetAttr(r19, r20)
-    if is_error(r21) goto L49 (error at wrapper:329) else goto L17
+    if is_error(r21) goto L51 (error at wrapper:329) else goto L17
 L17:
     r22 = 'ASYNC_LRU_ALLOW_SYNC'
     r23 = 'get'
     r24 = [r21, r22]
     r25 = load_address r24
     r26 = PyObject_VectorcallMethod(r23, r25, 9223372036854775810, 0)
-    if is_error(r26) goto L50 (error at wrapper:329) else goto L18
+    if is_error(r26) goto L52 (error at wrapper:329) else goto L18
 L18:
     dec_ref r21
     r27 = cast(union[str, None], r26)
-    if is_error(r27) goto L49 (error at wrapper:329) else goto L19
+    if is_error(r27) goto L51 (error at wrapper:329) else goto L19
 L19:
     r28 = load_address _Py_NoneStruct
     r29 = r27 != r28
-    if r29 goto L20 else goto L51 :: bool
+    if r29 goto L20 else goto L53 :: bool
 L20:
     r30 = cast(str, r27)
-    if is_error(r30) goto L49 (error at wrapper:329) else goto L21
+    if is_error(r30) goto L51 (error at wrapper:329) else goto L21
 L21:
     r31 = CPyStr_IsTrue(r30)
     dec_ref r30
-    if r31 goto L30 else goto L52 :: bool
+    if r31 goto L30 else goto L54 :: bool
 L22:
     r32 = ''
     r33 = 'Coroutine function is required, got '
@@ -4476,13 +4480,13 @@ L22:
     r37 = [r34, fn, r35]
     r38 = load_address r37
     r39 = PyObject_VectorcallMethod(r36, r38, 9223372036854775811, 0)
-    if is_error(r39) goto L45 (error at wrapper:330) else goto L23
+    if is_error(r39) goto L47 (error at wrapper:330) else goto L23
 L23:
     r40 = cast(str, r39)
-    if is_error(r40) goto L45 (error at wrapper:330) else goto L24
+    if is_error(r40) goto L47 (error at wrapper:330) else goto L24
 L24:
     r41 = PyList_New(2)
-    if is_error(r41) goto L53 (error at wrapper:330) else goto L25
+    if is_error(r41) goto L55 (error at wrapper:330) else goto L25
 L25:
     r42 = get_element_ptr r41 ob_item :: PyListObject
     r43 = load_mem r42 :: ptr*
@@ -4492,138 +4496,148 @@ L25:
     set_mem r44, r40 :: builtins.object*
     r45 = PyUnicode_Join(r32, r41)
     dec_ref r41
-    if is_error(r45) goto L45 (error at wrapper:330) else goto L26
+    if is_error(r45) goto L47 (error at wrapper:330) else goto L26
 L26:
     r46 = builtins :: module
     r47 = 'RuntimeError'
     r48 = CPyObject_GetAttr(r46, r47)
-    if is_error(r48) goto L54 (error at wrapper:330) else goto L27
+    if is_error(r48) goto L56 (error at wrapper:330) else goto L27
 L27:
     r49 = [r45]
     r50 = load_address r49
     r51 = PyObject_Vectorcall(r48, r50, 1, 0)
     dec_ref r48
-    if is_error(r51) goto L54 (error at wrapper:330) else goto L28
+    if is_error(r51) goto L56 (error at wrapper:330) else goto L28
 L28:
     dec_ref r45
     CPy_Raise(r51)
     dec_ref r51
-    if not 0 goto L45 (error at wrapper:330) else goto L29 :: bool
+    if not 0 goto L47 (error at wrapper:330) else goto L29 :: bool
 L29:
     unreachable
 L30:
     r52 = '_make_unbound_method'
     r53 = PyObject_HasAttr(fn, r52)
-    if r53 goto L31 else goto L55 :: bool
+    if r53 goto L31 else goto L57 :: bool
 L31:
     r54 = '_make_unbound_method'
     r55 = [fn]
     r56 = load_address r55
     r57 = PyObject_VectorcallMethod(r54, r56, 9223372036854775809, 0)
-    if is_error(r57) goto L49 (error at wrapper:334) else goto L32
+    if is_error(r57) goto L51 (error at wrapper:334) else goto L32
 L32:
     fn = r57
 L33:
     r58 = r0.maxsize
-    if is_error(r58) goto L56 (error at wrapper:336) else goto L34
+    if is_error(r58) goto L58 (error at wrapper:336) else goto L34
 L34:
     r59 = r0.typed
-    if is_error(r59) goto L57 (error at wrapper:336) else goto L35
+    if is_error(r59) goto L59 (error at wrapper:336) else goto L35
 L35:
     r60 = r0.ttl
     dec_ref r0
-    if is_error(r60) goto L58 (error at wrapper:336) else goto L36
+    if is_error(r60) goto L60 (error at wrapper:336) else goto L36
 L36:
     r61 = _LRUCacheWrapper(fn, r58, r59, r60)
     dec_ref fn
     dec_ref r58
     dec_ref r60
-    if is_error(r61) goto L45 (error at wrapper:336) else goto L37
+    if is_error(r61) goto L47 (error at wrapper:336) else goto L37
 L37:
+    wrapper = r61
     r62 = sys :: module
     r63 = 'version_info'
     r64 = CPyObject_GetAttr(r62, r63)
-    if is_error(r64) goto L59 (error at wrapper:337) else goto L38
+    if is_error(r64) goto L61 (error at wrapper:337) else goto L38
 L38:
     r65 = cast(tuple, r64)
-    if is_error(r65) goto L59 (error at wrapper:337) else goto L39
+    if is_error(r65) goto L61 (error at wrapper:337) else goto L39
 L39:
     r66 = (6, 24)
     r67 = box(tuple[int, int], r66)
     r68 = PyObject_RichCompare(r65, r67, 5)
     dec_ref r65
     dec_ref r67
-    if is_error(r68) goto L59 (error at wrapper:337) else goto L40
+    if is_error(r68) goto L61 (error at wrapper:337) else goto L40
 L40:
     r69 = unbox(bool, r68)
     dec_ref r68
-    if is_error(r69) goto L59 (error at wrapper:337) else goto L41
+    if is_error(r69) goto L61 (error at wrapper:337) else goto L41
 L41:
-    if r69 goto L60 else goto L44 :: bool
+    if r69 goto L42 else goto L46 :: bool
 L42:
-    r70 = raise RuntimeError('Reached allegedly unreachable code!')
-    if not r70 goto L45 (error at wrapper:338) else goto L43 :: bool
+    r70 = inspect :: module
+    r71 = 'markcoroutinefunction'
+    r72 = CPyObject_GetAttr(r70, r71)
+    if is_error(r72) goto L61 (error at wrapper:338) else goto L43
 L43:
-    unreachable
+    r73 = [wrapper]
+    r74 = load_address r73
+    r75 = PyObject_Vectorcall(r72, r74, 1, 0)
+    dec_ref r72
+    if is_error(r75) goto L61 (error at wrapper:338) else goto L44
 L44:
-    return r61
+    dec_ref wrapper
+    r76 = cast(faster_async_lru._LRUCacheWrapper, r75)
+    if is_error(r76) goto L47 (error at wrapper:338) else goto L45
 L45:
-    r71 = <error> :: faster_async_lru._LRUCacheWrapper
-    return r71
+    wrapper = r76
 L46:
-    dec_ref r0
-    dec_ref origin
-    goto L3
+    return wrapper
 L47:
-    dec_ref r0
-    dec_ref origin
-    goto L6
+    r77 = <error> :: faster_async_lru._LRUCacheWrapper
+    return r77
 L48:
     dec_ref r0
     dec_ref origin
-    goto L45
+    goto L3
 L49:
     dec_ref r0
-    goto L45
+    dec_ref origin
+    goto L6
 L50:
     dec_ref r0
-    dec_ref r21
-    goto L45
+    dec_ref origin
+    goto L47
 L51:
+    dec_ref r0
+    goto L47
+L52:
+    dec_ref r0
+    dec_ref r21
+    goto L47
+L53:
     dec_ref r0
     dec_ref r27
     goto L22
-L52:
+L54:
     dec_ref r0
     goto L22
-L53:
-    dec_ref r40
-    goto L45
-L54:
-    dec_ref r45
-    goto L45
 L55:
+    dec_ref r40
+    goto L47
+L56:
+    dec_ref r45
+    goto L47
+L57:
     inc_ref fn
     goto L33
-L56:
-    dec_ref fn
-    dec_ref r0
-    goto L45
-L57:
-    dec_ref fn
-    dec_ref r0
-    dec_ref r58
-    goto L45
 L58:
     dec_ref fn
-    dec_ref r58
-    goto L45
+    dec_ref r0
+    goto L47
 L59:
-    dec_ref r61
-    goto L45
+    dec_ref fn
+    dec_ref r0
+    dec_ref r58
+    goto L47
 L60:
-    dec_ref r61
-    goto L42
+    dec_ref fn
+    dec_ref r58
+    goto L47
+L61:
+    dec_ref wrapper
+    goto L47
 
 def _make_wrapper(maxsize, typed, ttl):
     maxsize :: union[int, None]
@@ -5273,11 +5287,13 @@ def __top_level__():
     r35 :: tuple
     r36 :: tuple[int, int]
     r37, r38 :: object
-    r39, r40 :: bool
-    r41 :: object
-    r42 :: str
-    r43 :: dict
-    r44, r45 :: object
+    r39 :: bool
+    r40 :: object
+    r41 :: str
+    r42 :: dict
+    r43 :: object
+    r44 :: bool
+    r45 :: object
     r46 :: str
     r47 :: object
     r48 :: tuple
@@ -5484,154 +5500,147 @@ def __top_level__():
     r274 :: str
     r275 :: i32
     r276 :: bit
-    r277 :: object
-    r278 :: dict
+    r277, r278 :: object
     r279 :: str
-    r280 :: object
-    r281 :: dict
-    r282 :: str
-    r283, r284 :: object
-    r285 :: tuple
-    r286 :: str
-    r287, r288 :: object
-    r289 :: bool
-    r290, r291, r292, r293 :: str
-    r294 :: tuple
-    r295 :: i32
-    r296 :: bit
-    r297 :: dict
+    r280, r281 :: object
+    r282 :: bool
+    r283, r284, r285 :: str
+    r286 :: tuple
+    r287 :: i32
+    r288 :: bit
+    r289 :: dict
+    r290 :: str
+    r291 :: i32
+    r292 :: bit
+    r293 :: dict
+    r294 :: tuple[]
+    r295 :: dict
+    r296, r297 :: object
     r298 :: str
-    r299 :: i32
-    r300 :: bit
-    r301 :: dict
-    r302 :: tuple[]
-    r303 :: dict
-    r304, r305 :: object
-    r306 :: str
-    r307 :: object
-    r308 :: str
-    r309 :: i32
-    r310 :: bit
-    r311 :: object
-    r312 :: str
-    r313 :: i32
-    r314 :: bit
-    r315 :: str
+    r299 :: object
+    r300 :: str
+    r301 :: i32
+    r302 :: bit
+    r303 :: object
+    r304 :: str
+    r305 :: i32
+    r306 :: bit
+    r307 :: str
+    r308 :: i32
+    r309 :: bit
+    r310, r311 :: str
+    r312 :: i32
+    r313 :: bit
+    r314, r315 :: str
     r316 :: i32
     r317 :: bit
-    r318, r319 :: str
-    r320 :: i32
-    r321 :: bit
-    r322, r323 :: str
-    r324 :: i32
-    r325 :: bit
-    r326 :: object
+    r318 :: object
+    r319 :: str
+    r320 :: object
+    r321 :: str
+    r322 :: bit
+    r323 :: dict
+    r324 :: str
+    r325 :: object
+    r326 :: dict
     r327 :: str
-    r328 :: object
-    r329 :: str
-    r330 :: bit
-    r331 :: dict
-    r332 :: str
-    r333 :: object
-    r334 :: dict
-    r335 :: str
-    r336, r337 :: object
-    r338 :: tuple
-    r339 :: str
-    r340, r341 :: object
-    r342 :: bool
-    r343, r344, r345, r346, r347, r348, r349, r350, r351, r352, r353, r354, r355, r356, r357, r358, r359, r360 :: str
-    r361 :: tuple
-    r362 :: i32
-    r363 :: bit
-    r364 :: dict
-    r365 :: str
-    r366 :: i32
-    r367 :: bit
-    r368 :: dict
-    r369 :: str
-    r370 :: object
-    r371 :: dict
-    r372 :: str
-    r373 :: object
-    r374 :: dict
-    r375 :: str
-    r376 :: object
-    r377 :: tuple[object, object]
-    r378, r379 :: object
-    r380 :: tuple
-    r381 :: str
-    r382, r383 :: object
-    r384 :: bool
-    r385, r386, r387, r388, r389, r390, r391, r392, r393, r394, r395, r396 :: str
-    r397 :: tuple
-    r398 :: i32
-    r399 :: bit
-    r400 :: dict
-    r401 :: str
-    r402 :: i32
-    r403 :: bit
-    r404 :: object
-    r405 :: str
+    r328, r329 :: object
+    r330 :: tuple
+    r331 :: str
+    r332, r333 :: object
+    r334 :: bool
+    r335, r336, r337, r338, r339, r340, r341, r342, r343, r344, r345, r346, r347, r348, r349, r350, r351, r352 :: str
+    r353 :: tuple
+    r354 :: i32
+    r355 :: bit
+    r356 :: dict
+    r357 :: str
+    r358 :: i32
+    r359 :: bit
+    r360 :: dict
+    r361 :: str
+    r362 :: object
+    r363 :: dict
+    r364 :: str
+    r365 :: object
+    r366 :: dict
+    r367 :: str
+    r368 :: object
+    r369 :: tuple[object, object]
+    r370, r371 :: object
+    r372 :: tuple
+    r373 :: str
+    r374, r375 :: object
+    r376 :: bool
+    r377, r378, r379, r380, r381, r382, r383, r384, r385, r386, r387, r388 :: str
+    r389 :: tuple
+    r390 :: i32
+    r391 :: bit
+    r392 :: dict
+    r393 :: str
+    r394 :: i32
+    r395 :: bit
+    r396 :: object
+    r397 :: str
+    r398 :: object
+    r399 :: tuple
+    r400, r401 :: object
+    r402 :: str
+    r403 :: bool
+    r404, r405 :: str
     r406 :: object
-    r407 :: tuple
-    r408, r409 :: object
-    r410 :: str
-    r411 :: bool
-    r412, r413 :: str
+    r407 :: object[2]
+    r408 :: object_ptr
+    r409 :: object
+    r410, r411, r412, r413 :: dict
     r414 :: object
-    r415 :: object[2]
-    r416 :: object_ptr
-    r417 :: object
-    r418, r419, r420, r421 :: dict
-    r422 :: object
+    r415 :: str
+    r416 :: i32
+    r417 :: bit
+    r418, r419 :: str
+    r420 :: i32
+    r421 :: bit
+    r422 :: faster_async_lru.__init____HashedSeq_obj
     r423 :: str
     r424 :: i32
     r425 :: bit
-    r426, r427 :: str
+    r426 :: faster_async_lru.__hash____HashedSeq_obj
+    r427 :: str
     r428 :: i32
     r429 :: bit
-    r430 :: faster_async_lru.__init____HashedSeq_obj
-    r431 :: str
+    r430, r431 :: str
     r432 :: i32
     r433 :: bit
-    r434 :: faster_async_lru.__hash____HashedSeq_obj
-    r435 :: str
+    r434, r435 :: str
     r436 :: i32
     r437 :: bit
     r438, r439 :: str
     r440 :: i32
     r441 :: bit
-    r442, r443 :: str
-    r444 :: i32
-    r445 :: bit
-    r446, r447 :: str
-    r448 :: i32
-    r449 :: bit
-    r450 :: object[3]
-    r451 :: object_ptr
-    r452 :: object
-    r453 :: dict
-    r454 :: str
-    r455, r456 :: object
-    r457 :: object[1]
-    r458 :: object_ptr
-    r459, r460 :: object
-    r461 :: object[1]
-    r462 :: object_ptr
-    r463 :: object
-    r464 :: dict
-    r465 :: str
+    r442 :: object[3]
+    r443 :: object_ptr
+    r444 :: object
+    r445 :: dict
+    r446 :: str
+    r447, r448 :: object
+    r449 :: object[1]
+    r450 :: object_ptr
+    r451, r452 :: object
+    r453 :: object[1]
+    r454 :: object_ptr
+    r455 :: object
+    r456 :: dict
+    r457 :: str
+    r458 :: object
+    r459 :: object[1]
+    r460 :: object_ptr
+    r461 :: object
+    r462 :: dict
+    r463 :: str
+    r464 :: i32
+    r465 :: bit
     r466 :: object
-    r467 :: object[1]
-    r468 :: object_ptr
-    r469 :: object
-    r470 :: dict
-    r471 :: str
-    r472 :: i32
-    r473 :: bit
-    r474 :: object
-    r475 :: None
+    r467 :: None
 L0:
     r0 = builtins :: module
     r1 = load_address _Py_NoneStruct
@@ -5640,7 +5649,7 @@ L0:
 L1:
     r3 = 'builtins'
     r4 = PyImport_Import(r3)
-    if is_error(r4) goto L159 (error at <module>:-1) else goto L2
+    if is_error(r4) goto L155 (error at <module>:-1) else goto L2
 L2:
     builtins = r4 :: module
     dec_ref r4
@@ -5660,13 +5669,13 @@ L3:
     r17 = 'faster_async_lru/__init__.py'
     r18 = '<module>'
     r19 = CPyImport_ImportMany(r15, r12, r16, r17, r18, r14)
-    if not r19 goto L159 else goto L4 :: bool
+    if not r19 goto L155 else goto L4 :: bool
 L4:
     r20 = ('namedtuple',)
     r21 = 'collections'
     r22 = faster_async_lru.globals :: static
     r23 = CPyImport_ImportFromMany(r21, r20, r20, r22)
-    if is_error(r23) goto L159 (error at <module>:7) else goto L5
+    if is_error(r23) goto L155 (error at <module>:7) else goto L5
 L5:
     collections = r23 :: module
     dec_ref r23
@@ -5674,7 +5683,7 @@ L5:
     r25 = 'typing'
     r26 = faster_async_lru.globals :: static
     r27 = CPyImport_ImportFromMany(r25, r24, r24, r26)
-    if is_error(r27) goto L159 (error at <module>:8) else goto L6
+    if is_error(r27) goto L155 (error at <module>:8) else goto L6
 L6:
     typing = r27 :: module
     dec_ref r27
@@ -5682,63 +5691,64 @@ L6:
     r29 = 'mypy_extensions'
     r30 = faster_async_lru.globals :: static
     r31 = CPyImport_ImportFromMany(r29, r28, r28, r30)
-    if is_error(r31) goto L159 (error at <module>:26) else goto L7
+    if is_error(r31) goto L155 (error at <module>:26) else goto L7
 L7:
     mypy_extensions = r31 :: module
     dec_ref r31
     r32 = sys :: module
     r33 = 'version_info'
     r34 = CPyObject_GetAttr(r32, r33)
-    if is_error(r34) goto L159 (error at <module>:29) else goto L8
+    if is_error(r34) goto L155 (error at <module>:29) else goto L8
 L8:
     r35 = cast(tuple, r34)
-    if is_error(r35) goto L159 (error at <module>:29) else goto L9
+    if is_error(r35) goto L155 (error at <module>:29) else goto L9
 L9:
     r36 = (6, 22)
     r37 = box(tuple[int, int], r36)
     r38 = PyObject_RichCompare(r35, r37, 5)
     dec_ref r35
     dec_ref r37
-    if is_error(r38) goto L159 (error at <module>:29) else goto L10
+    if is_error(r38) goto L155 (error at <module>:29) else goto L10
 L10:
     r39 = unbox(bool, r38)
     dec_ref r38
-    if is_error(r39) goto L159 (error at <module>:29) else goto L11
+    if is_error(r39) goto L155 (error at <module>:29) else goto L11
 L11:
     if r39 goto L12 else goto L14 :: bool
 L12:
-    r40 = raise RuntimeError('Reached allegedly unreachable code!')
-    if not r40 goto L159 (error at <module>:30) else goto L13 :: bool
+    r40 = ('Self',)
+    r41 = 'typing'
+    r42 = faster_async_lru.globals :: static
+    r43 = CPyImport_ImportFromMany(r41, r40, r40, r42)
+    if is_error(r43) goto L155 (error at <module>:30) else goto L13
 L13:
-    unreachable
+    typing = r43 :: module
+    dec_ref r43
+    goto L16
 L14:
-    r41 = ('Self',)
-    r42 = 'typing_extensions'
-    r43 = faster_async_lru.globals :: static
-    r44 = CPyImport_ImportFromMany(r42, r41, r41, r43)
-    if is_error(r44) goto L159 (error at <module>:32) else goto L15
+    r44 = raise RuntimeError('Reached allegedly unreachable code!')
+    if not r44 goto L155 (error at <module>:32) else goto L15 :: bool
 L15:
-    typing_extensions = r44 :: module
-    dec_ref r44
+    unreachable
 L16:
     r45 = sys :: module
     r46 = 'version_info'
     r47 = CPyObject_GetAttr(r45, r46)
-    if is_error(r47) goto L159 (error at <module>:34) else goto L17
+    if is_error(r47) goto L155 (error at <module>:34) else goto L17
 L17:
     r48 = cast(tuple, r47)
-    if is_error(r48) goto L159 (error at <module>:34) else goto L18
+    if is_error(r48) goto L155 (error at <module>:34) else goto L18
 L18:
     r49 = (6, 28)
     r50 = box(tuple[int, int], r49)
     r51 = PyObject_RichCompare(r48, r50, 0)
     dec_ref r48
     dec_ref r50
-    if is_error(r51) goto L159 (error at <module>:34) else goto L19
+    if is_error(r51) goto L155 (error at <module>:34) else goto L19
 L19:
     r52 = unbox(bool, r51)
     dec_ref r51
-    if is_error(r52) goto L159 (error at <module>:34) else goto L20
+    if is_error(r52) goto L155 (error at <module>:34) else goto L20
 L20:
     if r52 goto L21 else goto L23 :: bool
 L21:
@@ -5746,7 +5756,7 @@ L21:
     r54 = 'asyncio.coroutines'
     r55 = faster_async_lru.globals :: static
     r56 = CPyImport_ImportFromMany(r54, r53, r53, r55)
-    if is_error(r56) goto L159 (error at <module>:35) else goto L22
+    if is_error(r56) goto L155 (error at <module>:35) else goto L22
 L22:
     asyncio.coroutines = r56 :: module
     dec_ref r56
@@ -5756,7 +5766,7 @@ L23:
     r59 = '__version__'
     r60 = CPyDict_SetItem(r58, r59, r57)
     r61 = r60 >= 0 :: signed
-    if not r61 goto L159 (error at <module>:38) else goto L24 :: bool
+    if not r61 goto L155 (error at <module>:38) else goto L24 :: bool
 L24:
     r62 = 'alru_cache'
     inc_ref r62
@@ -5767,100 +5777,100 @@ L24:
     r67 = CPyDict_SetItem(r64, r65, r66)
     dec_ref r66
     r68 = r67 >= 0 :: signed
-    if not r68 goto L159 (error at <module>:40) else goto L25 :: bool
+    if not r68 goto L155 (error at <module>:40) else goto L25 :: bool
 L25:
     r69 = '_T'
     r70 = faster_async_lru.globals :: static
     r71 = 'TypeVar'
     r72 = CPyDict_GetItem(r70, r71)
-    if is_error(r72) goto L159 (error at <module>:43) else goto L26
+    if is_error(r72) goto L155 (error at <module>:43) else goto L26
 L26:
     r73 = [r69]
     r74 = load_address r73
     r75 = PyObject_Vectorcall(r72, r74, 1, 0)
     dec_ref r72
-    if is_error(r75) goto L159 (error at <module>:43) else goto L27
+    if is_error(r75) goto L155 (error at <module>:43) else goto L27
 L27:
     r76 = faster_async_lru.globals :: static
     r77 = '_T'
     r78 = CPyDict_SetItem(r76, r77, r75)
     dec_ref r75
     r79 = r78 >= 0 :: signed
-    if not r79 goto L159 (error at <module>:43) else goto L28 :: bool
+    if not r79 goto L155 (error at <module>:43) else goto L28 :: bool
 L28:
     r80 = '_R'
     r81 = faster_async_lru.globals :: static
     r82 = 'TypeVar'
     r83 = CPyDict_GetItem(r81, r82)
-    if is_error(r83) goto L159 (error at <module>:44) else goto L29
+    if is_error(r83) goto L155 (error at <module>:44) else goto L29
 L29:
     r84 = [r80]
     r85 = load_address r84
     r86 = PyObject_Vectorcall(r83, r85, 1, 0)
     dec_ref r83
-    if is_error(r86) goto L159 (error at <module>:44) else goto L30
+    if is_error(r86) goto L155 (error at <module>:44) else goto L30
 L30:
     r87 = faster_async_lru.globals :: static
     r88 = '_R'
     r89 = CPyDict_SetItem(r87, r88, r86)
     dec_ref r86
     r90 = r89 >= 0 :: signed
-    if not r90 goto L159 (error at <module>:44) else goto L31 :: bool
+    if not r90 goto L155 (error at <module>:44) else goto L31 :: bool
 L31:
     r91 = faster_async_lru.globals :: static
     r92 = 'Coroutine'
     r93 = CPyDict_GetItem(r91, r92)
-    if is_error(r93) goto L159 (error at <module>:45) else goto L32
+    if is_error(r93) goto L155 (error at <module>:45) else goto L32
 L32:
     r94 = faster_async_lru.globals :: static
     r95 = 'Any'
     r96 = CPyDict_GetItem(r94, r95)
-    if is_error(r96) goto L160 (error at <module>:45) else goto L33
+    if is_error(r96) goto L156 (error at <module>:45) else goto L33
 L33:
     r97 = faster_async_lru.globals :: static
     r98 = 'Any'
     r99 = CPyDict_GetItem(r97, r98)
-    if is_error(r99) goto L161 (error at <module>:45) else goto L34
+    if is_error(r99) goto L157 (error at <module>:45) else goto L34
 L34:
     r100 = faster_async_lru.globals :: static
     r101 = '_R'
     r102 = CPyDict_GetItem(r100, r101)
-    if is_error(r102) goto L162 (error at <module>:45) else goto L35
+    if is_error(r102) goto L158 (error at <module>:45) else goto L35
 L35:
     r103 = (r96, r99, r102)
     r104 = box(tuple[object, object, object], r103)
     r105 = PyObject_GetItem(r93, r104)
     dec_ref r93
     dec_ref r104
-    if is_error(r105) goto L159 (error at <module>:45) else goto L36
+    if is_error(r105) goto L155 (error at <module>:45) else goto L36
 L36:
     r106 = faster_async_lru.globals :: static
     r107 = '_Coro'
     r108 = CPyDict_SetItem(r106, r107, r105)
     dec_ref r105
     r109 = r108 >= 0 :: signed
-    if not r109 goto L159 (error at <module>:45) else goto L37 :: bool
+    if not r109 goto L155 (error at <module>:45) else goto L37 :: bool
 L37:
     r110 = faster_async_lru.globals :: static
     r111 = 'Callable'
     r112 = CPyDict_GetItem(r110, r111)
-    if is_error(r112) goto L159 (error at <module>:46) else goto L38
+    if is_error(r112) goto L155 (error at <module>:46) else goto L38
 L38:
     r113 = load_address _Py_EllipsisObject
     r114 = faster_async_lru.globals :: static
     r115 = '_Coro'
     r116 = CPyDict_GetItem(r114, r115)
-    if is_error(r116) goto L163 (error at <module>:46) else goto L39
+    if is_error(r116) goto L159 (error at <module>:46) else goto L39
 L39:
     r117 = faster_async_lru.globals :: static
     r118 = '_R'
     r119 = CPyDict_GetItem(r117, r118)
-    if is_error(r119) goto L164 (error at <module>:46) else goto L40
+    if is_error(r119) goto L160 (error at <module>:46) else goto L40
 L40:
     r120 = PyObject_GetItem(r116, r119)
     dec_ref r116
     dec_ref r119
-    if is_error(r120) goto L163 (error at <module>:46) else goto L41
+    if is_error(r120) goto L159 (error at <module>:46) else goto L41
 L41:
     inc_ref r113
     r121 = (r113, r120)
@@ -5868,34 +5878,34 @@ L41:
     r123 = PyObject_GetItem(r112, r122)
     dec_ref r112
     dec_ref r122
-    if is_error(r123) goto L159 (error at <module>:46) else goto L42
+    if is_error(r123) goto L155 (error at <module>:46) else goto L42
 L42:
     r124 = faster_async_lru.globals :: static
     r125 = '_CB'
     r126 = CPyDict_SetItem(r124, r125, r123)
     dec_ref r123
     r127 = r126 >= 0 :: signed
-    if not r127 goto L159 (error at <module>:46) else goto L43 :: bool
+    if not r127 goto L155 (error at <module>:46) else goto L43 :: bool
 L43:
     r128 = faster_async_lru.globals :: static
     r129 = 'Union'
     r130 = CPyDict_GetItem(r128, r129)
-    if is_error(r130) goto L159 (error at <module>:47) else goto L44
+    if is_error(r130) goto L155 (error at <module>:47) else goto L44
 L44:
     r131 = faster_async_lru.globals :: static
     r132 = '_CB'
     r133 = CPyDict_GetItem(r131, r132)
-    if is_error(r133) goto L165 (error at <module>:47) else goto L45
+    if is_error(r133) goto L161 (error at <module>:47) else goto L45
 L45:
     r134 = faster_async_lru.globals :: static
     r135 = '_R'
     r136 = CPyDict_GetItem(r134, r135)
-    if is_error(r136) goto L166 (error at <module>:47) else goto L46
+    if is_error(r136) goto L162 (error at <module>:47) else goto L46
 L46:
     r137 = PyObject_GetItem(r133, r136)
     dec_ref r133
     dec_ref r136
-    if is_error(r137) goto L165 (error at <module>:47) else goto L47
+    if is_error(r137) goto L161 (error at <module>:47) else goto L47
 L47:
     r138 = 'functools.partial[_Coro[_R]]'
     r139 = 'functools.partialmethod[_Coro[_R]]'
@@ -5906,14 +5916,14 @@ L47:
     r142 = PyObject_GetItem(r130, r141)
     dec_ref r130
     dec_ref r141
-    if is_error(r142) goto L159 (error at <module>:47) else goto L48
+    if is_error(r142) goto L155 (error at <module>:47) else goto L48
 L48:
     r143 = faster_async_lru.globals :: static
     r144 = '_CBP'
     r145 = CPyDict_SetItem(r143, r144, r142)
     dec_ref r142
     r146 = r145 >= 0 :: signed
-    if not r146 goto L159 (error at <module>:47) else goto L49 :: bool
+    if not r146 goto L155 (error at <module>:47) else goto L49 :: bool
 L49:
     r147 = '_CacheInfo'
     r148 = 'hits'
@@ -5921,7 +5931,7 @@ L49:
     r150 = 'maxsize'
     r151 = 'currsize'
     r152 = PyList_New(4)
-    if is_error(r152) goto L159 (error at <module>:49) else goto L50
+    if is_error(r152) goto L155 (error at <module>:49) else goto L50
 L50:
     r153 = get_element_ptr r152 ob_item :: PyListObject
     r154 = load_mem r153 :: ptr*
@@ -5939,13 +5949,13 @@ L50:
     r158 = faster_async_lru.globals :: static
     r159 = 'namedtuple'
     r160 = CPyDict_GetItem(r158, r159)
-    if is_error(r160) goto L167 (error at <module>:49) else goto L51
+    if is_error(r160) goto L163 (error at <module>:49) else goto L51
 L51:
     r161 = [r147, r152]
     r162 = load_address r161
     r163 = PyObject_Vectorcall(r160, r162, 2, 0)
     dec_ref r160
-    if is_error(r163) goto L167 (error at <module>:49) else goto L52
+    if is_error(r163) goto L163 (error at <module>:49) else goto L52
 L52:
     dec_ref r152
     r164 = faster_async_lru.globals :: static
@@ -5953,12 +5963,12 @@ L52:
     r166 = CPyDict_SetItem(r164, r165, r163)
     dec_ref r163
     r167 = r166 >= 0 :: signed
-    if not r167 goto L159 (error at <module>:49) else goto L53 :: bool
+    if not r167 goto L155 (error at <module>:49) else goto L53 :: bool
 L53:
     r168 = functools :: module
     r169 = 'partial'
     r170 = CPyObject_GetAttr(r168, r169)
-    if is_error(r170) goto L159 (error at <module>:52) else goto L54
+    if is_error(r170) goto L155 (error at <module>:52) else goto L54
 L54:
     faster_async_lru.partial = r170 :: static
     r171 = faster_async_lru.globals :: static
@@ -5966,12 +5976,12 @@ L54:
     r173 = CPyDict_SetItem(r171, r172, r170)
     dec_ref r170
     r174 = r173 >= 0 :: signed
-    if not r174 goto L159 (error at <module>:52) else goto L55 :: bool
+    if not r174 goto L155 (error at <module>:52) else goto L55 :: bool
 L55:
     r175 = functools :: module
     r176 = 'partialmethod'
     r177 = CPyObject_GetAttr(r175, r176)
-    if is_error(r177) goto L159 (error at <module>:53) else goto L56
+    if is_error(r177) goto L155 (error at <module>:53) else goto L56
 L56:
     faster_async_lru.partialmethod = r177 :: static
     r178 = faster_async_lru.globals :: static
@@ -5979,12 +5989,12 @@ L56:
     r180 = CPyDict_SetItem(r178, r179, r177)
     dec_ref r177
     r181 = r180 >= 0 :: signed
-    if not r181 goto L159 (error at <module>:53) else goto L57 :: bool
+    if not r181 goto L155 (error at <module>:53) else goto L57 :: bool
 L57:
     r182 = asyncio :: module
     r183 = 'gather'
     r184 = CPyObject_GetAttr(r182, r183)
-    if is_error(r184) goto L159 (error at <module>:55) else goto L58
+    if is_error(r184) goto L155 (error at <module>:55) else goto L58
 L58:
     faster_async_lru.gather = r184 :: static
     r185 = faster_async_lru.globals :: static
@@ -5992,12 +6002,12 @@ L58:
     r187 = CPyDict_SetItem(r185, r186, r184)
     dec_ref r184
     r188 = r187 >= 0 :: signed
-    if not r188 goto L159 (error at <module>:55) else goto L59 :: bool
+    if not r188 goto L155 (error at <module>:55) else goto L59 :: bool
 L59:
     r189 = asyncio :: module
     r190 = 'get_running_loop'
     r191 = CPyObject_GetAttr(r189, r190)
-    if is_error(r191) goto L159 (error at <module>:56) else goto L60
+    if is_error(r191) goto L155 (error at <module>:56) else goto L60
 L60:
     faster_async_lru.get_running_loop = r191 :: static
     r192 = faster_async_lru.globals :: static
@@ -6005,12 +6015,12 @@ L60:
     r194 = CPyDict_SetItem(r192, r193, r191)
     dec_ref r191
     r195 = r194 >= 0 :: signed
-    if not r195 goto L159 (error at <module>:56) else goto L61 :: bool
+    if not r195 goto L155 (error at <module>:56) else goto L61 :: bool
 L61:
     r196 = asyncio :: module
     r197 = 'shield'
     r198 = CPyObject_GetAttr(r196, r197)
-    if is_error(r198) goto L159 (error at <module>:57) else goto L62
+    if is_error(r198) goto L155 (error at <module>:57) else goto L62
 L62:
     faster_async_lru.shield = r198 :: static
     r199 = faster_async_lru.globals :: static
@@ -6018,7 +6028,7 @@ L62:
     r201 = CPyDict_SetItem(r199, r200, r198)
     dec_ref r198
     r202 = r201 >= 0 :: signed
-    if not r202 goto L159 (error at <module>:57) else goto L63 :: bool
+    if not r202 goto L155 (error at <module>:57) else goto L63 :: bool
 L63:
     r203 = typing :: module
     r204 = load_address _Py_NoneStruct
@@ -6027,7 +6037,7 @@ L63:
 L64:
     r206 = 'typing'
     r207 = PyImport_Import(r206)
-    if is_error(r207) goto L159 (error at <module>:61) else goto L65
+    if is_error(r207) goto L155 (error at <module>:61) else goto L65
 L65:
     typing = r207 :: module
     dec_ref r207
@@ -6035,16 +6045,16 @@ L66:
     r208 = PyImport_GetModuleDict()
     r209 = 'typing'
     r210 = CPyDict_GetItem(r208, r209)
-    if is_error(r210) goto L159 (error at <module>:61) else goto L67
+    if is_error(r210) goto L155 (error at <module>:61) else goto L67
 L67:
     r211 = '_TypedDict'
     r212 = CPyObject_GetAttr(r210, r211)
     dec_ref r210
-    if is_error(r212) goto L159 (error at <module>:61) else goto L68
+    if is_error(r212) goto L155 (error at <module>:61) else goto L68
 L68:
     r213 = PyTuple_Pack(1, r212)
     dec_ref r212
-    if is_error(r213) goto L159 (error at <module>:61) else goto L69
+    if is_error(r213) goto L155 (error at <module>:61) else goto L69
 L69:
     r214 = typing :: module
     r215 = load_address _Py_NoneStruct
@@ -6053,7 +6063,7 @@ L69:
 L70:
     r217 = 'typing'
     r218 = PyImport_Import(r217)
-    if is_error(r218) goto L168 (error at <module>:61) else goto L71
+    if is_error(r218) goto L164 (error at <module>:61) else goto L71
 L71:
     typing = r218 :: module
     dec_ref r218
@@ -6061,12 +6071,12 @@ L72:
     r219 = PyImport_GetModuleDict()
     r220 = 'typing'
     r221 = CPyDict_GetItem(r219, r220)
-    if is_error(r221) goto L168 (error at <module>:61) else goto L73
+    if is_error(r221) goto L164 (error at <module>:61) else goto L73
 L73:
     r222 = '_TypedDictMeta'
     r223 = CPyObject_GetAttr(r221, r222)
     dec_ref r221
-    if is_error(r223) goto L168 (error at <module>:61) else goto L74
+    if is_error(r223) goto L164 (error at <module>:61) else goto L74
 L74:
     r224 = '__prepare__'
     r225 = PyObject_HasAttr(r223, r224)
@@ -6075,89 +6085,89 @@ L75:
     r226 = '_CacheParameters'
     r227 = '__prepare__'
     r228 = CPyObject_GetAttr(r223, r227)
-    if is_error(r228) goto L169 (error at <module>:61) else goto L76
+    if is_error(r228) goto L165 (error at <module>:61) else goto L76
 L76:
     r229 = [r226, r213]
     r230 = load_address r229
     r231 = PyObject_Vectorcall(r228, r230, 2, 0)
     dec_ref r228
-    if is_error(r231) goto L169 (error at <module>:61) else goto L77
+    if is_error(r231) goto L165 (error at <module>:61) else goto L77
 L77:
     r232 = cast(dict, r231)
-    if is_error(r232) goto L169 (error at <module>:61) else goto L78
+    if is_error(r232) goto L165 (error at <module>:61) else goto L78
 L78:
     r233 = r232
     goto L81
 L79:
     r234 = PyDict_New()
-    if is_error(r234) goto L169 (error at <module>:61) else goto L80
+    if is_error(r234) goto L165 (error at <module>:61) else goto L80
 L80:
     r233 = r234
 L81:
     r235 = PyDict_New()
-    if is_error(r235) goto L170 (error at <module>:61) else goto L82
+    if is_error(r235) goto L166 (error at <module>:61) else goto L82
 L82:
     r236 = load_address PyBool_Type
     r237 = 'typed'
     r238 = PyDict_SetItem(r235, r237, r236)
     r239 = r238 >= 0 :: signed
-    if not r239 goto L171 (error at <module>:62) else goto L83 :: bool
+    if not r239 goto L167 (error at <module>:62) else goto L83 :: bool
 L83:
     r240 = load_address PyType_Type
     r241 = 'maxsize'
     r242 = PyDict_SetItem(r235, r241, r240)
     r243 = r242 >= 0 :: signed
-    if not r243 goto L171 (error at <module>:63) else goto L84 :: bool
+    if not r243 goto L167 (error at <module>:63) else goto L84 :: bool
 L84:
     r244 = load_address PyLong_Type
     r245 = 'tasks'
     r246 = PyDict_SetItem(r235, r245, r244)
     r247 = r246 >= 0 :: signed
-    if not r247 goto L171 (error at <module>:64) else goto L85 :: bool
+    if not r247 goto L167 (error at <module>:64) else goto L85 :: bool
 L85:
     r248 = load_address PyBool_Type
     r249 = 'closed'
     r250 = PyDict_SetItem(r235, r249, r248)
     r251 = r250 >= 0 :: signed
-    if not r251 goto L171 (error at <module>:65) else goto L86 :: bool
+    if not r251 goto L167 (error at <module>:65) else goto L86 :: bool
 L86:
     r252 = '_CacheParameters'
     r253 = '__annotations__'
     r254 = CPyDict_SetItem(r233, r253, r235)
     dec_ref r235
     r255 = r254 >= 0 :: signed
-    if not r255 goto L170 (error at <module>:61) else goto L87 :: bool
+    if not r255 goto L166 (error at <module>:61) else goto L87 :: bool
 L87:
     r256 = 'mypyc filler docstring'
     r257 = '__doc__'
     r258 = CPyDict_SetItem(r233, r257, r256)
     r259 = r258 >= 0 :: signed
-    if not r259 goto L170 (error at <module>:61) else goto L88 :: bool
+    if not r259 goto L166 (error at <module>:61) else goto L88 :: bool
 L88:
     r260 = 'faster_async_lru'
     r261 = '__module__'
     r262 = CPyDict_SetItem(r233, r261, r260)
     r263 = r262 >= 0 :: signed
-    if not r263 goto L170 (error at <module>:61) else goto L89 :: bool
+    if not r263 goto L166 (error at <module>:61) else goto L89 :: bool
 L89:
     r264 = [r252, r213, r233]
     r265 = load_address r264
     r266 = PyObject_Vectorcall(r223, r265, 3, 0)
     dec_ref r223
-    if is_error(r266) goto L172 (error at <module>:61) else goto L90
+    if is_error(r266) goto L168 (error at <module>:61) else goto L90
 L90:
     dec_ref r213
     dec_ref r233
     r267 = faster_async_lru.globals :: static
     r268 = 'final'
     r269 = CPyDict_GetItem(r267, r268)
-    if is_error(r269) goto L173 (error at <module>:60) else goto L91
+    if is_error(r269) goto L169 (error at <module>:60) else goto L91
 L91:
     r270 = [r266]
     r271 = load_address r270
     r272 = PyObject_Vectorcall(r269, r271, 1, 0)
     dec_ref r269
-    if is_error(r272) goto L173 (error at <module>:61) else goto L92
+    if is_error(r272) goto L169 (error at <module>:61) else goto L92
 L92:
     dec_ref r266
     faster_async_lru._CacheParameters = r272 :: type
@@ -6166,479 +6176,456 @@ L92:
     r275 = PyDict_SetItem(r273, r274, r272)
     dec_ref r272
     r276 = r275 >= 0 :: signed
-    if not r276 goto L159 (error at <module>:61) else goto L93 :: bool
+    if not r276 goto L155 (error at <module>:61) else goto L93 :: bool
 L93:
     r277 = faster_async_lru._CacheParameters :: type
-    r278 = faster_async_lru.globals :: static
-    r279 = 'Generic'
-    r280 = CPyDict_GetItem(r278, r279)
-    if is_error(r280) goto L159 (error at <module>:70) else goto L94
+    r278 = <error> :: object
+    r279 = 'faster_async_lru'
+    r280 = faster_async_lru._CacheItem_template :: type
+    r281 = CPyType_FromTemplate(r280, r278, r279)
+    if is_error(r281) goto L155 (error at <module>:70) else goto L94
 L94:
-    r281 = faster_async_lru.globals :: static
-    r282 = '_R'
-    r283 = CPyDict_GetItem(r281, r282)
-    if is_error(r283) goto L174 (error at <module>:70) else goto L95
+    r282 = _CacheItem_trait_vtable_setup()
+    if is_error(r282) goto L170 (error at <module>:-1) else goto L95
 L95:
-    r284 = PyObject_GetItem(r280, r283)
-    dec_ref r280
-    dec_ref r283
-    if is_error(r284) goto L159 (error at <module>:70) else goto L96
+    r283 = '__mypyc_attrs__'
+    r284 = 'fut'
+    r285 = 'later_call'
+    r286 = PyTuple_Pack(2, r284, r285)
+    if is_error(r286) goto L170 (error at <module>:70) else goto L96
 L96:
-    r285 = PyTuple_Pack(1, r284)
-    dec_ref r284
-    if is_error(r285) goto L159 (error at <module>:70) else goto L97
+    r287 = PyObject_SetAttr(r281, r283, r286)
+    dec_ref r286
+    r288 = r287 >= 0 :: signed
+    if not r288 goto L170 (error at <module>:70) else goto L97 :: bool
 L97:
-    r286 = 'faster_async_lru'
-    r287 = faster_async_lru._CacheItem_template :: type
-    r288 = CPyType_FromTemplate(r287, r285, r286)
-    dec_ref r285
-    if is_error(r288) goto L159 (error at <module>:70) else goto L98
+    faster_async_lru._CacheItem = r281 :: type
+    r289 = faster_async_lru.globals :: static
+    r290 = '_CacheItem'
+    r291 = PyDict_SetItem(r289, r290, r281)
+    r292 = r291 >= 0 :: signed
+    if not r292 goto L170 (error at <module>:70) else goto L98 :: bool
 L98:
-    r289 = _CacheItem_trait_vtable_setup()
-    if is_error(r289) goto L175 (error at <module>:-1) else goto L99
+    r293 = PyDict_New()
+    if is_error(r293) goto L170 (error at <module>:70) else goto L99
 L99:
-    r290 = '__mypyc_attrs__'
-    r291 = 'fut'
-    r292 = 'later_call'
-    r293 = '__dict__'
-    r294 = PyTuple_Pack(3, r291, r292, r293)
-    if is_error(r294) goto L175 (error at <module>:70) else goto L100
+    r294 = ()
+    r295 = PyDict_New()
+    if is_error(r295) goto L171 (error at <module>:70) else goto L100
 L100:
-    r295 = PyObject_SetAttr(r288, r290, r294)
-    dec_ref r294
-    r296 = r295 >= 0 :: signed
-    if not r296 goto L175 (error at <module>:70) else goto L101 :: bool
+    r296 = load_address PyType_Type
+    r297 = asyncio :: module
+    r298 = 'Future'
+    r299 = CPyObject_GetAttr(r297, r298)
+    if is_error(r299) goto L172 (error at <module>:71) else goto L101
 L101:
-    faster_async_lru._CacheItem = r288 :: type
-    r297 = faster_async_lru.globals :: static
-    r298 = '_CacheItem'
-    r299 = PyDict_SetItem(r297, r298, r288)
-    r300 = r299 >= 0 :: signed
-    if not r300 goto L175 (error at <module>:70) else goto L102 :: bool
+    r300 = 'fut'
+    r301 = PyDict_SetItem(r295, r300, r299)
+    dec_ref r299
+    r302 = r301 >= 0 :: signed
+    if not r302 goto L172 (error at <module>:71) else goto L102 :: bool
 L102:
-    r301 = PyDict_New()
-    if is_error(r301) goto L175 (error at <module>:70) else goto L103
+    r303 = load_address PyType_Type
+    r304 = 'later_call'
+    r305 = PyDict_SetItem(r295, r304, r303)
+    r306 = r305 >= 0 :: signed
+    if not r306 goto L172 (error at <module>:72) else goto L103 :: bool
 L103:
-    r302 = ()
-    r303 = PyDict_New()
-    if is_error(r303) goto L176 (error at <module>:70) else goto L104
+    r307 = '__annotations__'
+    r308 = CPyDict_SetItem(r293, r307, r295)
+    r309 = r308 >= 0 :: signed
+    if not r309 goto L172 (error at <module>:70) else goto L104 :: bool
 L104:
-    r304 = load_address PyType_Type
-    r305 = asyncio :: module
-    r306 = 'Future'
-    r307 = CPyObject_GetAttr(r305, r306)
-    if is_error(r307) goto L177 (error at <module>:71) else goto L105
+    r310 = 'mypyc filler docstring'
+    r311 = '__doc__'
+    r312 = CPyDict_SetItem(r293, r311, r310)
+    r313 = r312 >= 0 :: signed
+    if not r313 goto L172 (error at <module>:70) else goto L105 :: bool
 L105:
-    r308 = 'fut'
-    r309 = PyDict_SetItem(r303, r308, r307)
-    dec_ref r307
-    r310 = r309 >= 0 :: signed
-    if not r310 goto L177 (error at <module>:71) else goto L106 :: bool
-L106:
-    r311 = load_address PyType_Type
-    r312 = 'later_call'
-    r313 = PyDict_SetItem(r303, r312, r311)
-    r314 = r313 >= 0 :: signed
-    if not r314 goto L177 (error at <module>:72) else goto L107 :: bool
-L107:
-    r315 = '__annotations__'
-    r316 = CPyDict_SetItem(r301, r315, r303)
+    r314 = 'faster_async_lru'
+    r315 = '__module__'
+    r316 = CPyDict_SetItem(r293, r315, r314)
     r317 = r316 >= 0 :: signed
-    if not r317 goto L177 (error at <module>:70) else goto L108 :: bool
+    if not r317 goto L172 (error at <module>:70) else goto L106 :: bool
+L106:
+    r318 = dataclasses :: module
+    r319 = 'dataclass'
+    r320 = CPyObject_GetAttr(r318, r319)
+    if is_error(r320) goto L172 (error at <module>:69) else goto L107
+L107:
+    r321 = 'dataclasses'
+    r322 = CPyDataclass_SleightOfHand(r320, r281, r293, r295, r321)
+    dec_ref r320
+    dec_ref r281
+    dec_ref r293
+    dec_ref r295
+    if not r322 goto L155 (error at <module>:70) else goto L108 :: bool
 L108:
-    r318 = 'mypyc filler docstring'
-    r319 = '__doc__'
-    r320 = CPyDict_SetItem(r301, r319, r318)
-    r321 = r320 >= 0 :: signed
-    if not r321 goto L177 (error at <module>:70) else goto L109 :: bool
+    r323 = faster_async_lru.globals :: static
+    r324 = 'Generic'
+    r325 = CPyDict_GetItem(r323, r324)
+    if is_error(r325) goto L155 (error at <module>:81) else goto L109
 L109:
-    r322 = 'faster_async_lru'
-    r323 = '__module__'
-    r324 = CPyDict_SetItem(r301, r323, r322)
-    r325 = r324 >= 0 :: signed
-    if not r325 goto L177 (error at <module>:70) else goto L110 :: bool
+    r326 = faster_async_lru.globals :: static
+    r327 = '_R'
+    r328 = CPyDict_GetItem(r326, r327)
+    if is_error(r328) goto L173 (error at <module>:81) else goto L110
 L110:
-    r326 = dataclasses :: module
-    r327 = 'dataclass'
-    r328 = CPyObject_GetAttr(r326, r327)
-    if is_error(r328) goto L177 (error at <module>:69) else goto L111
-L111:
-    r329 = 'dataclasses'
-    r330 = CPyDataclass_SleightOfHand(r328, r288, r301, r303, r329)
+    r329 = PyObject_GetItem(r325, r328)
+    dec_ref r325
     dec_ref r328
-    dec_ref r288
-    dec_ref r301
-    dec_ref r303
-    if not r330 goto L159 (error at <module>:70) else goto L112 :: bool
+    if is_error(r329) goto L155 (error at <module>:81) else goto L111
+L111:
+    r330 = PyTuple_Pack(1, r329)
+    dec_ref r329
+    if is_error(r330) goto L155 (error at <module>:81) else goto L112
 L112:
-    r331 = faster_async_lru.globals :: static
-    r332 = 'Generic'
-    r333 = CPyDict_GetItem(r331, r332)
-    if is_error(r333) goto L159 (error at <module>:81) else goto L113
+    r331 = 'faster_async_lru'
+    r332 = faster_async_lru._LRUCacheWrapper_template :: type
+    r333 = CPyType_FromTemplate(r332, r330, r331)
+    dec_ref r330
+    if is_error(r333) goto L155 (error at <module>:81) else goto L113
 L113:
-    r334 = faster_async_lru.globals :: static
-    r335 = '_R'
-    r336 = CPyDict_GetItem(r334, r335)
-    if is_error(r336) goto L178 (error at <module>:81) else goto L114
+    r334 = _LRUCacheWrapper_trait_vtable_setup()
+    if is_error(r334) goto L174 (error at <module>:-1) else goto L114
 L114:
-    r337 = PyObject_GetItem(r333, r336)
-    dec_ref r333
-    dec_ref r336
-    if is_error(r337) goto L159 (error at <module>:81) else goto L115
+    r335 = '__mypyc_attrs__'
+    r336 = '__module__'
+    r337 = '__name__'
+    r338 = '__qualname__'
+    r339 = '__doc__'
+    r340 = '__annotations__'
+    r341 = '__dict__'
+    r342 = '_is_coroutine'
+    r343 = '__wrapped__'
+    r344 = '__maxsize'
+    r345 = '__typed'
+    r346 = '__ttl'
+    r347 = '__cache'
+    r348 = '__closed'
+    r349 = '__hits'
+    r350 = '__misses'
+    r351 = '__tasks'
+    r352 = '__dict__'
+    r353 = PyTuple_Pack(17, r336, r337, r338, r339, r340, r341, r342, r343, r344, r345, r346, r347, r348, r349, r350, r351, r352)
+    if is_error(r353) goto L174 (error at <module>:81) else goto L115
 L115:
-    r338 = PyTuple_Pack(1, r337)
-    dec_ref r337
-    if is_error(r338) goto L159 (error at <module>:81) else goto L116
+    r354 = PyObject_SetAttr(r333, r335, r353)
+    dec_ref r353
+    r355 = r354 >= 0 :: signed
+    if not r355 goto L174 (error at <module>:81) else goto L116 :: bool
 L116:
-    r339 = 'faster_async_lru'
-    r340 = faster_async_lru._LRUCacheWrapper_template :: type
-    r341 = CPyType_FromTemplate(r340, r338, r339)
-    dec_ref r338
-    if is_error(r341) goto L159 (error at <module>:81) else goto L117
+    faster_async_lru._LRUCacheWrapper = r333 :: type
+    r356 = faster_async_lru.globals :: static
+    r357 = '_LRUCacheWrapper'
+    r358 = PyDict_SetItem(r356, r357, r333)
+    dec_ref r333
+    r359 = r358 >= 0 :: signed
+    if not r359 goto L155 (error at <module>:81) else goto L117 :: bool
 L117:
-    r342 = _LRUCacheWrapper_trait_vtable_setup()
-    if is_error(r342) goto L179 (error at <module>:-1) else goto L118
+    r360 = faster_async_lru.globals :: static
+    r361 = 'Generic'
+    r362 = CPyDict_GetItem(r360, r361)
+    if is_error(r362) goto L155 (error at <module>:259) else goto L118
 L118:
-    r343 = '__mypyc_attrs__'
-    r344 = '__module__'
-    r345 = '__name__'
-    r346 = '__qualname__'
-    r347 = '__doc__'
-    r348 = '__annotations__'
-    r349 = '__dict__'
-    r350 = '_is_coroutine'
-    r351 = '__wrapped__'
-    r352 = '__maxsize'
-    r353 = '__typed'
-    r354 = '__ttl'
-    r355 = '__cache'
-    r356 = '__closed'
-    r357 = '__hits'
-    r358 = '__misses'
-    r359 = '__tasks'
-    r360 = '__dict__'
-    r361 = PyTuple_Pack(17, r344, r345, r346, r347, r348, r349, r350, r351, r352, r353, r354, r355, r356, r357, r358, r359, r360)
-    if is_error(r361) goto L179 (error at <module>:81) else goto L119
+    r363 = faster_async_lru.globals :: static
+    r364 = '_R'
+    r365 = CPyDict_GetItem(r363, r364)
+    if is_error(r365) goto L175 (error at <module>:259) else goto L119
 L119:
-    r362 = PyObject_SetAttr(r341, r343, r361)
-    dec_ref r361
-    r363 = r362 >= 0 :: signed
-    if not r363 goto L179 (error at <module>:81) else goto L120 :: bool
+    r366 = faster_async_lru.globals :: static
+    r367 = '_T'
+    r368 = CPyDict_GetItem(r366, r367)
+    if is_error(r368) goto L176 (error at <module>:259) else goto L120
 L120:
-    faster_async_lru._LRUCacheWrapper = r341 :: type
-    r364 = faster_async_lru.globals :: static
-    r365 = '_LRUCacheWrapper'
-    r366 = PyDict_SetItem(r364, r365, r341)
-    dec_ref r341
-    r367 = r366 >= 0 :: signed
-    if not r367 goto L159 (error at <module>:81) else goto L121 :: bool
-L121:
-    r368 = faster_async_lru.globals :: static
-    r369 = 'Generic'
-    r370 = CPyDict_GetItem(r368, r369)
-    if is_error(r370) goto L159 (error at <module>:259) else goto L122
-L122:
-    r371 = faster_async_lru.globals :: static
-    r372 = '_R'
-    r373 = CPyDict_GetItem(r371, r372)
-    if is_error(r373) goto L180 (error at <module>:259) else goto L123
-L123:
-    r374 = faster_async_lru.globals :: static
-    r375 = '_T'
-    r376 = CPyDict_GetItem(r374, r375)
-    if is_error(r376) goto L181 (error at <module>:259) else goto L124
-L124:
-    r377 = (r373, r376)
-    r378 = box(tuple[object, object], r377)
-    r379 = PyObject_GetItem(r370, r378)
+    r369 = (r365, r368)
+    r370 = box(tuple[object, object], r369)
+    r371 = PyObject_GetItem(r362, r370)
+    dec_ref r362
     dec_ref r370
-    dec_ref r378
-    if is_error(r379) goto L159 (error at <module>:259) else goto L125
+    if is_error(r371) goto L155 (error at <module>:259) else goto L121
+L121:
+    r372 = PyTuple_Pack(1, r371)
+    dec_ref r371
+    if is_error(r372) goto L155 (error at <module>:259) else goto L122
+L122:
+    r373 = 'faster_async_lru'
+    r374 = faster_async_lru._LRUCacheWrapperInstanceMethod_template :: type
+    r375 = CPyType_FromTemplate(r374, r372, r373)
+    dec_ref r372
+    if is_error(r375) goto L155 (error at <module>:259) else goto L123
+L123:
+    r376 = _LRUCacheWrapperInstanceMethod_trait_vtable_setup()
+    if is_error(r376) goto L177 (error at <module>:-1) else goto L124
+L124:
+    r377 = '__mypyc_attrs__'
+    r378 = '__module__'
+    r379 = '__name__'
+    r380 = '__qualname__'
+    r381 = '__doc__'
+    r382 = '__annotations__'
+    r383 = '__dict__'
+    r384 = '_is_coroutine'
+    r385 = '__wrapped__'
+    r386 = '__instance'
+    r387 = '__wrapper'
+    r388 = '__dict__'
+    r389 = PyTuple_Pack(11, r378, r379, r380, r381, r382, r383, r384, r385, r386, r387, r388)
+    if is_error(r389) goto L177 (error at <module>:259) else goto L125
 L125:
-    r380 = PyTuple_Pack(1, r379)
-    dec_ref r379
-    if is_error(r380) goto L159 (error at <module>:259) else goto L126
+    r390 = PyObject_SetAttr(r375, r377, r389)
+    dec_ref r389
+    r391 = r390 >= 0 :: signed
+    if not r391 goto L177 (error at <module>:259) else goto L126 :: bool
 L126:
-    r381 = 'faster_async_lru'
-    r382 = faster_async_lru._LRUCacheWrapperInstanceMethod_template :: type
-    r383 = CPyType_FromTemplate(r382, r380, r381)
-    dec_ref r380
-    if is_error(r383) goto L159 (error at <module>:259) else goto L127
+    faster_async_lru._LRUCacheWrapperInstanceMethod = r375 :: type
+    r392 = faster_async_lru.globals :: static
+    r393 = '_LRUCacheWrapperInstanceMethod'
+    r394 = PyDict_SetItem(r392, r393, r375)
+    dec_ref r375
+    r395 = r394 >= 0 :: signed
+    if not r395 goto L155 (error at <module>:259) else goto L127 :: bool
 L127:
-    r384 = _LRUCacheWrapperInstanceMethod_trait_vtable_setup()
-    if is_error(r384) goto L182 (error at <module>:-1) else goto L128
+    r396 = builtins :: module
+    r397 = 'list'
+    r398 = CPyObject_GetAttr(r396, r397)
+    if is_error(r398) goto L155 (error at <module>:384) else goto L128
 L128:
-    r385 = '__mypyc_attrs__'
-    r386 = '__module__'
-    r387 = '__name__'
-    r388 = '__qualname__'
-    r389 = '__doc__'
-    r390 = '__annotations__'
-    r391 = '__dict__'
-    r392 = '_is_coroutine'
-    r393 = '__wrapped__'
-    r394 = '__instance'
-    r395 = '__wrapper'
-    r396 = '__dict__'
-    r397 = PyTuple_Pack(11, r386, r387, r388, r389, r390, r391, r392, r393, r394, r395, r396)
-    if is_error(r397) goto L182 (error at <module>:259) else goto L129
+    r399 = PyTuple_Pack(1, r398)
+    dec_ref r398
+    if is_error(r399) goto L155 (error at <module>:384) else goto L129
 L129:
-    r398 = PyObject_SetAttr(r383, r385, r397)
-    dec_ref r397
-    r399 = r398 >= 0 :: signed
-    if not r399 goto L182 (error at <module>:259) else goto L130 :: bool
+    r400 = load_address PyType_Type
+    r401 = CPy_CalculateMetaclass(r400, r399)
+    if is_error(r401) goto L178 (error at <module>:384) else goto L130
 L130:
-    faster_async_lru._LRUCacheWrapperInstanceMethod = r383 :: type
-    r400 = faster_async_lru.globals :: static
-    r401 = '_LRUCacheWrapperInstanceMethod'
-    r402 = PyDict_SetItem(r400, r401, r383)
-    dec_ref r383
-    r403 = r402 >= 0 :: signed
-    if not r403 goto L159 (error at <module>:259) else goto L131 :: bool
+    r402 = '__prepare__'
+    r403 = PyObject_HasAttr(r401, r402)
+    if r403 goto L131 else goto L135 :: bool
 L131:
-    r404 = builtins :: module
-    r405 = 'list'
-    r406 = CPyObject_GetAttr(r404, r405)
-    if is_error(r406) goto L159 (error at <module>:384) else goto L132
+    r404 = '_HashedSeq'
+    r405 = '__prepare__'
+    r406 = CPyObject_GetAttr(r401, r405)
+    if is_error(r406) goto L178 (error at <module>:384) else goto L132
 L132:
-    r407 = PyTuple_Pack(1, r406)
+    r407 = [r404, r399]
+    r408 = load_address r407
+    r409 = PyObject_Vectorcall(r406, r408, 2, 0)
     dec_ref r406
-    if is_error(r407) goto L159 (error at <module>:384) else goto L133
+    if is_error(r409) goto L178 (error at <module>:384) else goto L133
 L133:
-    r408 = load_address PyType_Type
-    r409 = CPy_CalculateMetaclass(r408, r407)
-    if is_error(r409) goto L183 (error at <module>:384) else goto L134
+    r410 = cast(dict, r409)
+    if is_error(r410) goto L178 (error at <module>:384) else goto L134
 L134:
-    r410 = '__prepare__'
-    r411 = PyObject_HasAttr(r409, r410)
-    if r411 goto L135 else goto L139 :: bool
+    r411 = r410
+    goto L137
 L135:
-    r412 = '_HashedSeq'
-    r413 = '__prepare__'
-    r414 = CPyObject_GetAttr(r409, r413)
-    if is_error(r414) goto L183 (error at <module>:384) else goto L136
+    r412 = PyDict_New()
+    if is_error(r412) goto L178 (error at <module>:384) else goto L136
 L136:
-    r415 = [r412, r407]
-    r416 = load_address r415
-    r417 = PyObject_Vectorcall(r414, r416, 2, 0)
-    dec_ref r414
-    if is_error(r417) goto L183 (error at <module>:384) else goto L137
+    r411 = r412
 L137:
-    r418 = cast(dict, r417)
-    if is_error(r418) goto L183 (error at <module>:384) else goto L138
+    r413 = PyDict_New()
+    if is_error(r413) goto L179 (error at <module>:384) else goto L138
 L138:
-    r419 = r418
-    goto L141
+    r414 = load_address PyUnicode_Type
+    r415 = '__slots__'
+    r416 = PyDict_SetItem(r413, r415, r414)
+    r417 = r416 >= 0 :: signed
+    if not r417 goto L180 (error at <module>:391) else goto L139 :: bool
 L139:
-    r420 = PyDict_New()
-    if is_error(r420) goto L183 (error at <module>:384) else goto L140
+    r418 = 'hashvalue'
+    r419 = '__slots__'
+    r420 = CPyDict_SetItem(r411, r419, r418)
+    r421 = r420 >= 0 :: signed
+    if not r421 goto L180 (error at <module>:391) else goto L140 :: bool
 L140:
-    r419 = r420
+    r422 = __init____HashedSeq_obj()
+    if is_error(r422) goto L180 (error at <module>:393) else goto L141
 L141:
-    r421 = PyDict_New()
-    if is_error(r421) goto L184 (error at <module>:384) else goto L142
-L142:
-    r422 = load_address PyUnicode_Type
-    r423 = '__slots__'
-    r424 = PyDict_SetItem(r421, r423, r422)
+    r423 = '__init__'
+    r424 = CPyDict_SetItem(r411, r423, r422)
+    dec_ref r422
     r425 = r424 >= 0 :: signed
-    if not r425 goto L185 (error at <module>:391) else goto L143 :: bool
+    if not r425 goto L180 (error at <module>:393) else goto L142 :: bool
+L142:
+    r426 = __hash____HashedSeq_obj()
+    if is_error(r426) goto L180 (error at <module>:397) else goto L143
 L143:
-    r426 = 'hashvalue'
-    r427 = '__slots__'
-    r428 = CPyDict_SetItem(r419, r427, r426)
+    r427 = '__hash__'
+    r428 = CPyDict_SetItem(r411, r427, r426)
+    dec_ref r426
     r429 = r428 >= 0 :: signed
-    if not r429 goto L185 (error at <module>:391) else goto L144 :: bool
+    if not r429 goto L180 (error at <module>:397) else goto L144 :: bool
 L144:
-    r430 = __init____HashedSeq_obj()
-    if is_error(r430) goto L185 (error at <module>:393) else goto L145
-L145:
-    r431 = '__init__'
-    r432 = CPyDict_SetItem(r419, r431, r430)
-    dec_ref r430
+    r430 = '_HashedSeq'
+    r431 = '__annotations__'
+    r432 = CPyDict_SetItem(r411, r431, r413)
+    dec_ref r413
     r433 = r432 >= 0 :: signed
-    if not r433 goto L185 (error at <module>:393) else goto L146 :: bool
-L146:
-    r434 = __hash____HashedSeq_obj()
-    if is_error(r434) goto L185 (error at <module>:397) else goto L147
-L147:
-    r435 = '__hash__'
-    r436 = CPyDict_SetItem(r419, r435, r434)
-    dec_ref r434
+    if not r433 goto L179 (error at <module>:384) else goto L145 :: bool
+L145:
+    r434 = 'mypyc filler docstring'
+    r435 = '__doc__'
+    r436 = CPyDict_SetItem(r411, r435, r434)
     r437 = r436 >= 0 :: signed
-    if not r437 goto L185 (error at <module>:397) else goto L148 :: bool
-L148:
-    r438 = '_HashedSeq'
-    r439 = '__annotations__'
-    r440 = CPyDict_SetItem(r419, r439, r421)
-    dec_ref r421
+    if not r437 goto L179 (error at <module>:384) else goto L146 :: bool
+L146:
+    r438 = 'faster_async_lru'
+    r439 = '__module__'
+    r440 = CPyDict_SetItem(r411, r439, r438)
     r441 = r440 >= 0 :: signed
-    if not r441 goto L184 (error at <module>:384) else goto L149 :: bool
+    if not r441 goto L179 (error at <module>:384) else goto L147 :: bool
+L147:
+    r442 = [r430, r399, r411]
+    r443 = load_address r442
+    r444 = PyObject_Vectorcall(r401, r443, 3, 0)
+    if is_error(r444) goto L179 (error at <module>:384) else goto L148
+L148:
+    dec_ref r399
+    dec_ref r411
+    r445 = faster_async_lru.globals :: static
+    r446 = 'mypyc_attr'
+    r447 = CPyDict_GetItem(r445, r446)
+    if is_error(r447) goto L181 (error at <module>:383) else goto L149
 L149:
-    r442 = 'mypyc filler docstring'
-    r443 = '__doc__'
-    r444 = CPyDict_SetItem(r419, r443, r442)
-    r445 = r444 >= 0 :: signed
-    if not r445 goto L184 (error at <module>:384) else goto L150 :: bool
+    r448 = box(bool, 0)
+    r449 = [r448]
+    r450 = load_address r449
+    r451 = ('native_class',)
+    r452 = PyObject_Vectorcall(r447, r450, 0, r451)
+    dec_ref r447
+    if is_error(r452) goto L181 (error at <module>:383) else goto L150
 L150:
-    r446 = 'faster_async_lru'
-    r447 = '__module__'
-    r448 = CPyDict_SetItem(r419, r447, r446)
-    r449 = r448 >= 0 :: signed
-    if not r449 goto L184 (error at <module>:384) else goto L151 :: bool
-L151:
-    r450 = [r438, r407, r419]
-    r451 = load_address r450
-    r452 = PyObject_Vectorcall(r409, r451, 3, 0)
-    if is_error(r452) goto L184 (error at <module>:384) else goto L152
-L152:
-    dec_ref r407
-    dec_ref r419
-    r453 = faster_async_lru.globals :: static
-    r454 = 'mypyc_attr'
-    r455 = CPyDict_GetItem(r453, r454)
-    if is_error(r455) goto L186 (error at <module>:383) else goto L153
-L153:
-    r456 = box(bool, 0)
-    r457 = [r456]
-    r458 = load_address r457
-    r459 = ('native_class',)
-    r460 = PyObject_Vectorcall(r455, r458, 0, r459)
-    dec_ref r455
-    if is_error(r460) goto L186 (error at <module>:383) else goto L154
-L154:
-    r461 = [r452]
-    r462 = load_address r461
-    r463 = PyObject_Vectorcall(r460, r462, 1, 0)
-    dec_ref r460
-    if is_error(r463) goto L186 (error at <module>:384) else goto L155
-L155:
+    r453 = [r444]
+    r454 = load_address r453
+    r455 = PyObject_Vectorcall(r452, r454, 1, 0)
     dec_ref r452
-    r464 = faster_async_lru.globals :: static
-    r465 = 'final'
-    r466 = CPyDict_GetItem(r464, r465)
-    if is_error(r466) goto L187 (error at <module>:382) else goto L156
-L156:
-    r467 = [r463]
-    r468 = load_address r467
-    r469 = PyObject_Vectorcall(r466, r468, 1, 0)
-    dec_ref r466
-    if is_error(r469) goto L187 (error at <module>:384) else goto L157
-L157:
-    dec_ref r463
-    faster_async_lru._HashedSeq = r469 :: type
-    r470 = faster_async_lru.globals :: static
-    r471 = '_HashedSeq'
-    r472 = PyDict_SetItem(r470, r471, r469)
-    dec_ref r469
-    r473 = r472 >= 0 :: signed
-    if not r473 goto L159 (error at <module>:384) else goto L158 :: bool
-L158:
-    r474 = faster_async_lru._HashedSeq :: type
+    if is_error(r455) goto L181 (error at <module>:384) else goto L151
+L151:
+    dec_ref r444
+    r456 = faster_async_lru.globals :: static
+    r457 = 'final'
+    r458 = CPyDict_GetItem(r456, r457)
+    if is_error(r458) goto L182 (error at <module>:382) else goto L152
+L152:
+    r459 = [r455]
+    r460 = load_address r459
+    r461 = PyObject_Vectorcall(r458, r460, 1, 0)
+    dec_ref r458
+    if is_error(r461) goto L182 (error at <module>:384) else goto L153
+L153:
+    dec_ref r455
+    faster_async_lru._HashedSeq = r461 :: type
+    r462 = faster_async_lru.globals :: static
+    r463 = '_HashedSeq'
+    r464 = PyDict_SetItem(r462, r463, r461)
+    dec_ref r461
+    r465 = r464 >= 0 :: signed
+    if not r465 goto L155 (error at <module>:384) else goto L154 :: bool
+L154:
+    r466 = faster_async_lru._HashedSeq :: type
     return 1
-L159:
-    r475 = <error> :: None
-    return r475
-L160:
+L155:
+    r467 = <error> :: None
+    return r467
+L156:
     dec_ref r93
-    goto L159
-L161:
+    goto L155
+L157:
     dec_ref r93
     dec_ref r96
-    goto L159
-L162:
+    goto L155
+L158:
     dec_ref r93
     dec_ref r96
     dec_ref r99
-    goto L159
-L163:
+    goto L155
+L159:
     dec_ref r112
-    goto L159
-L164:
+    goto L155
+L160:
     dec_ref r112
     dec_ref r116
-    goto L159
-L165:
+    goto L155
+L161:
     dec_ref r130
-    goto L159
-L166:
+    goto L155
+L162:
     dec_ref r130
     dec_ref r133
-    goto L159
-L167:
+    goto L155
+L163:
     dec_ref r152
-    goto L159
-L168:
+    goto L155
+L164:
     dec_ref r213
-    goto L159
-L169:
+    goto L155
+L165:
     dec_ref r213
     dec_ref r223
-    goto L159
-L170:
+    goto L155
+L166:
     dec_ref r213
     dec_ref r223
     dec_ref r233
-    goto L159
-L171:
+    goto L155
+L167:
     dec_ref r213
     dec_ref r223
     dec_ref r233
     dec_ref r235
-    goto L159
-L172:
+    goto L155
+L168:
     dec_ref r213
     dec_ref r233
-    goto L159
-L173:
+    goto L155
+L169:
     dec_ref r266
-    goto L159
+    goto L155
+L170:
+    dec_ref r281
+    goto L155
+L171:
+    dec_ref r281
+    dec_ref r293
+    goto L155
+L172:
+    dec_ref r281
+    dec_ref r293
+    dec_ref r295
+    goto L155
+L173:
+    dec_ref r325
+    goto L155
 L174:
-    dec_ref r280
-    goto L159
-L175:
-    dec_ref r288
-    goto L159
-L176:
-    dec_ref r288
-    dec_ref r301
-    goto L159
-L177:
-    dec_ref r288
-    dec_ref r301
-    dec_ref r303
-    goto L159
-L178:
     dec_ref r333
-    goto L159
+    goto L155
+L175:
+    dec_ref r362
+    goto L155
+L176:
+    dec_ref r362
+    dec_ref r365
+    goto L155
+L177:
+    dec_ref r375
+    goto L155
+L178:
+    dec_ref r399
+    goto L155
 L179:
-    dec_ref r341
-    goto L159
+    dec_ref r399
+    dec_ref r411
+    goto L155
 L180:
-    dec_ref r370
-    goto L159
+    dec_ref r399
+    dec_ref r411
+    dec_ref r413
+    goto L155
 L181:
-    dec_ref r370
-    dec_ref r373
-    goto L159
+    dec_ref r444
+    goto L155
 L182:
-    dec_ref r383
-    goto L159
-L183:
-    dec_ref r407
-    goto L159
-L184:
-    dec_ref r407
-    dec_ref r419
-    goto L159
-L185:
-    dec_ref r407
-    dec_ref r419
-    dec_ref r421
-    goto L159
-L186:
-    dec_ref r452
-    goto L159
-L187:
-    dec_ref r463
-    goto L159
+    dec_ref r455
+    goto L155
