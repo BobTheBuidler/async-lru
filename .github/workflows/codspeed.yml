@@ -26,9 +26,10 @@ jobs:
           cache-dependency-path: '**/requirements*.txt'
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements-dev.txt
-          pip install .
+        run: pip install -r requirements-dev.txt
+
+      - name: Remove python files
+        run: rm -r faster_async_lru
 
       - name: Uninstall coverage utils
         # these pollute the codspeed flamegraphs
@@ -41,5 +42,5 @@ jobs:
         uses: CodSpeedHQ/action@v4
         with:
           mode: instrumentation
-          run: pytest -c .empty-pytest.ini --codspeed benchmark.py --timeout=0
+          run: pytest -c .empty-pytest.ini --codspeed benchmark.py -k "test_faster_" --timeout=0
           token: ${{ secrets.CODSPEED_TOKEN }}
