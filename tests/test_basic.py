@@ -7,7 +7,7 @@ from typing import Callable
 
 import pytest
 
-from async_lru import _CacheParameters, alru_cache
+from faster_async_lru import _CacheParameters, alru_cache
 
 
 def test_alru_cache_not_callable() -> None:

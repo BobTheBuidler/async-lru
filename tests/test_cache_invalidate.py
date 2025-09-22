@@ -1,7 +1,7 @@
 import asyncio
 from typing import Callable
 
-from async_lru import alru_cache
+from faster_async_lru import alru_cache
 
 
 async def test_cache_invalidate(check_lru: Callable[..., None]) -> None:

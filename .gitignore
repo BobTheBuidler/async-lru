@@ -9,7 +9,11 @@ __pycache__/
 .Python
 env/
 pyvenv/
-build/
+build/**/*.o
+build/**/*.so
+build/**/*.py
+build/**/py.typed
+build/setup.py
 develop-eggs/
 dist/
 downloads/

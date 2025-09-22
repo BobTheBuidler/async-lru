@@ -39,7 +39,7 @@ This package is a port of Python's built-in `functools.lru_cache <https://docs.p
     import asyncio
 
     import aiohttp
-    from async_lru import alru_cache
+    from faster_async_lru import alru_cache
 
 
     @alru_cache(maxsize=32)
